@@ -2,135 +2,122 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Moon, Sun } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
 
+  // Prevent scroll when mobile menu is open
   useEffect(() => {
-    const isDark = localStorage.getItem("darkMode") === "true"
-    setIsDarkMode(isDark)
-    document.documentElement.classList.toggle("dark", isDark)
-  }, [])
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode
-    setIsDarkMode(newDarkMode)
-    localStorage.setItem("darkMode", newDarkMode.toString())
-    document.documentElement.classList.toggle("dark", newDarkMode)
-  }
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+  }, [isOpen])
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
-              <img className="h-8 w-8" src="/logo.svg" alt="EUCLID" />
-            </Link>
+    <>
+      <nav className="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center">
+              <Link href="/" className="text-xl font-bold text-secondary">
+                EUCLID
+              </Link>
+            </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <NavLink href="/">Home</NavLink>
+              <div className="ml-10 flex items-center space-x-8">
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
                 <NavLink href="/achievements">Achievements</NavLink>
                 <NavLink href="/training-events">Training & Events</NavLink>
                 <NavLink href="/collaborations">Collaborations</NavLink>
-                <NavLink href="/contact">Contact</NavLink>
+                {/* <Button variant="outline" size="sm" className="ml-4">
+                  Log in
+                </Button> */}
+                <Button>Get Started</Button>
               </div>
             </div>
-          </div>
-          <div className="hidden md:block">
-            <button onClick={toggleDarkMode} className="bg-gray-200 dark:bg-gray-700 p-2 rounded-full">
-              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
-          </div>
-          <div className="-mr-2 flex md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="bg-gray-200 dark:bg-gray-700 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              {!isOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              )}
+            <button className="md:hidden p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(true)}>
+              <Menu className="h-6 w-6 text-gray-600" />
             </button>
           </div>
         </div>
-      </div>
+      </nav>
 
-      <motion.div
-        className={`${isOpen ? "block" : "hidden"} md:hidden`}
-        initial="closed"
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: { opacity: 1, height: "auto" },
-          closed: { opacity: 0, height: 0 },
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <NavLink href="/" mobile>
-            Home
-          </NavLink>
-          <NavLink href="/about" mobile>
-            About
-          </NavLink>
-          <NavLink href="/projects" mobile>
-            Projects
-          </NavLink>
-          <NavLink href="/achievements" mobile>
-            Achievements
-          </NavLink>
-          <NavLink href="/training-events" mobile>
-            Training & Events
-          </NavLink>
-          <NavLink href="/collaborations" mobile>
-            Collaborations
-          </NavLink>
-          <NavLink href="/contact" mobile>
-            Contact
-          </NavLink>
-        </div>
-        <div className="pt-4 pb-3 border-t border-gray-700">
-          <button onClick={toggleDarkMode} className="ml-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-full">
-            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
-        </div>
-      </motion.div>
-    </nav>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              className="fixed top-0 left-0 right-0 h-screen bg-white z-50 md:hidden overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-8">
+                  <Link href="/" className="text-xl font-bold text-secondary">
+                    EUCLID
+                  </Link>
+                  <button className="p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(false)}>
+                    <X className="h-6 w-6 text-gray-600" />
+                  </button>
+                </div>
+                <div className="flex flex-col space-y-6">
+                  <MobileNavLink href="/about" onClick={() => setIsOpen(false)}>
+                    About
+                  </MobileNavLink>
+                  <MobileNavLink href="/projects" onClick={() => setIsOpen(false)}>
+                    Projects
+                  </MobileNavLink>
+                  <MobileNavLink href="/achievements" onClick={() => setIsOpen(false)}>
+                    Achievements
+                  </MobileNavLink>
+                  <MobileNavLink href="/training-events" onClick={() => setIsOpen(false)}>
+                    Training & Events
+                  </MobileNavLink>
+                  <MobileNavLink href="/collaborations" onClick={() => setIsOpen(false)}>
+                    Collaborations
+                  </MobileNavLink>
+                  <div className="pt-6 border-t border-gray-100">
+                    {/* <Button variant="outline" className="w-full mb-4">
+                      Log in
+                    </Button> */}
+                    <Button className="w-full">Get Started</Button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
-const NavLink = ({ href, children, mobile = false }: { href: string; children: React.ReactNode; mobile?: boolean }) => (
+const NavLink = ({ href, children }: {href: string, children: string}) => (
+  <Link href={href} className="text-gray-600 hover:text-secondary font-medium transition-colors">
+    {children}
+  </Link>
+)
+
+const MobileNavLink = ({ href, children, onClick }: {href: string, children: string, onClick: any}) => (
   <Link
     href={href}
-    className={`${
-      mobile ? "block px-3 py-2 rounded-md text-base font-medium" : "px-3 py-2 rounded-md text-sm font-medium"
-    } text-gray-800 dark:text-white hover:bg-gray-700 hover:text-white`}
+    onClick={onClick}
+    className="text-lg font-medium text-gray-600 hover:text-secondary transition-colors"
   >
     {children}
   </Link>

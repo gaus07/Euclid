@@ -1,0 +1,87 @@
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+
+export default function Home() {
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-[#F8FAFF] to-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-secondary leading-tight">
+                Sustainability and Security of Blockchain Network
+              </h1>
+              <p className="text-lg sm:text-xl text-gray-600">
+                Pioneering ethical blockchain solutions for a secure, sustainable future at Somaiya Vidyavihar
+                University.
+              </p>
+              <Button size="lg" asChild>
+                <Link href="/projects">Get the best solutions</Link>
+              </Button>
+            </div>
+            <div className="relative">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hxNe18EgbBqPP7KGTcdiz7aA7zSeCI.png"
+                alt="Blockchain visualization"
+                className="rounded-2xl shadow-2xl w-full"
+              />
+              <div className="absolute -z-10 top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+              <div className="absolute -z-10 bottom-0 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-secondary mb-12">
+            Get the right protection to keep moving forward
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard
+              title="Blockchain Security"
+              description="Advanced security measures to protect your blockchain assets and transactions."
+            />
+            <FeatureCard
+              title="Sustainable Solutions"
+              description="Eco-friendly blockchain implementations that minimize environmental impact."
+            />
+            <FeatureCard
+              title="Research Excellence"
+              description="Cutting-edge research in blockchain technology and its applications."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 md:py-24 bg-[#F8FAFF]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <StatCard number="₹1 Cr" label="Seed Grant Funding" />
+            <StatCard number="5+" label="Active Projects" />
+            <StatCard number="2" label="Publications Accepted" />
+            <StatCard number="67+" label="Trained Participants" />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+const FeatureCard = ({ title, description }: {title: string, description: string}) => (
+  <div className="p-6 rounded-xl bg-[#F8FAFF] hover:shadow-lg transition-shadow">
+    <h3 className="text-xl font-semibold text-secondary mb-3">{title}</h3>
+    <p className="text-gray-600">{description}</p>
+  </div>
+)
+
+const StatCard = ({ number, label }: {number: string, label: string}) => (
+  <div className="text-center p-6">
+    <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{number}</div>
+    <div className="text-gray-600">{label}</div>
+  </div>
+)
+

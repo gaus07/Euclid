@@ -1,106 +1,107 @@
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Mail, Phone, MapPin } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8 xl:col-span-1">
-            <img className="h-10" src="/logo.svg" alt="EUCLID" />
-            <p className="text-gray-500 dark:text-gray-400 text-base">
-              Pioneering ethical blockchain solutions for a secure, sustainable future.
-            </p>
-            <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-gray-500">
-                <span className="sr-only">LinkedIn</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fillRule="evenodd"
-                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                    clipRule="evenodd"
-                  />
+    <footer className="bg-[#F8FAFF] border-t border-gray-100">
+      <div className="max-w-7xl mx-auto py-16 px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Company Info */}
+          <div className="space-y-6">
+            <Link href="/" className="text-xl font-bold text-secondary">
+              EUCLID
+            </Link>
+            <p className="text-gray-600">Pioneering ethical blockchain solutions for a secure, sustainable future.</p>
+            <div className="flex space-x-4">
+              {/* <SocialLink href="#" aria-label="LinkedIn">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-gray-500">
-                <span className="sr-only">Twitter</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+              </SocialLink>
+              <SocialLink href="#" aria-label="Twitter">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
                 </svg>
-              </a>
+              </SocialLink> */}
             </div>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
-                <ul className="mt-4 space-y-4">
-                  <li>
-                    <Link
-                      href="/projects"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Projects
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/training-events"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Training
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/collaborations"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Collaborations
-                    </Link>
-                  </li>
-                </ul>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Quick Links</h3>
+            <ul className="space-y-4">
+              <FooterLink href="/about">About</FooterLink>
+              <FooterLink href="/projects">Projects</FooterLink>
+              <FooterLink href="/achievements">Achievements</FooterLink>
+              <FooterLink href="/training-events">Training & Events</FooterLink>
+              <FooterLink href="/collaborations">Collaborations</FooterLink>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Contact Us</h3>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <MapPin className="w-5 h-5 text-secondary mt-0.5" />
+                <p className="text-gray-600">
+                  Somaiya Vidyavihar University
+                  <br />
+                  Mumbai, Maharashtra
+                </p>
               </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
-                <ul className="mt-4 space-y-4">
-                  <li>
-                    <Link
-                      href="/about"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/achievements"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Achievements
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/contact"
-                      className="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                </ul>
+              <div className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 text-secondary" />
+                <a href="mailto:info@euclid.edu" className="text-gray-600 hover:text-secondary">
+                  info@euclid.edu
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-secondary" />
+                <a href="tel:+911234567890" className="text-gray-600 hover:text-secondary">
+                  +91 123 456 7890
+                </a>
               </div>
             </div>
+          </div>
+
+          {/* Contact Form */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Send us a message</h3>
+            <form className="space-y-4">
+              <Input type="email" placeholder="Email" />
+              <Textarea placeholder="Message" className="h-24" />
+              <Button type="submit" className="w-full">
+                Send Message
+              </Button>
+            </form>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <p className="text-base text-gray-400 xl:text-center">
-            &copy; 2023 EUCLID, Somaiya Vidyavihar University. All rights reserved.
-          </p>
+
+        <div className="mt-12 pt-8 border-t border-gray-100">
+          <p className="text-center text-gray-500">© {new Date().getFullYear()} EUCLID. All rights reserved.</p>
         </div>
       </div>
     </footer>
   )
 }
+
+const FooterLink = ({ href, children }: {href: string, children: string}) => (
+  <li>
+    <Link href={href} className="text-gray-600 hover:text-secondary transition-colors">
+      {children}
+    </Link>
+  </li>
+)
+
+// const SocialLink = ({ href, children, ...props }: {href: string, children: string}) => (
+//   <a href={href} className="text-gray-400 hover:text-secondary transition-colors" {...props}>
+//     {children}
+//   </a>
+// )
 
 export default Footer
 
