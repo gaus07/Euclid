@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
+import Timeline from "@/components/Timeline"
 
 export default function About() {
   return (
@@ -63,16 +64,8 @@ export default function About() {
       </section>
 
       {/* Interactive Timeline */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Our Journey</h2>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary dark:bg-secondary"></div>
-            <TimelineItem year="2022-23" description="5+ projects launched, 25L budget approved" />
-            <TimelineItem year="2023-24" description="Kubera-AWS proposal, ₹60 Lac consultancy (Aaizel Tech)" />
-            <TimelineItem year="2024-25" description="Functional mining rig setup (Future)" />
-          </div>
-        </div>
+      <section className="py-16 dark:bg-gry-900">
+        <Timeline />
       </section>
     </div>
   )
@@ -89,26 +82,3 @@ const TeamMember = ({ name, role, image }: { name: string; role: string; image: 
     </Card>
   )
 }
-
-const TimelineItem = ({ year, description }: { year: string; description: string }) => {
-  return (
-    <motion.div
-      className="relative mb-8"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      <div className="flex items-center mb-1">
-        <div className="bg-primary dark:bg-secondary rounded-full w-4 h-4 absolute left-1/2 transform -translate-x-1/2"></div>
-        <div className="w-1/2 pr-8 text-right">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{year}</h3>
-        </div>
-      </div>
-      <div className="w-1/2 ml-auto pl-8">
-        <p className="text-gray-700 dark:text-gray-300">{description}</p>
-      </div>
-    </motion.div>
-  )
-}
-
