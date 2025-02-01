@@ -5,9 +5,26 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Modal } from "../Modal"
+import { ServiceInquiryForm } from "../ServiceInquiryForm"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [theme, setTheme] = useState("sustainable-green")
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "sustainable-green"
+    setTheme(savedTheme)
+    document.documentElement.setAttribute("data-theme", savedTheme)
+  }, [])
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
+    document.documentElement.setAttribute("data-theme", newTheme)
+  }
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -20,11 +37,11 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100">
+      <nav className="bg-secondary/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-secondary">
+              <Link href="/" className="text-xl font-bold text-primary">
                 EUCLID
               </Link>
             </div>
@@ -35,10 +52,22 @@ const Navbar = () => {
                 <NavLink href="/achievements">Achievements</NavLink>
                 <NavLink href="/training-events">Training & Events</NavLink>
                 <NavLink href="/collaborations">Collaborations</NavLink>
-                {/* <Button variant="outline" size="sm" className="ml-4">
+                <Select value={theme} onValueChange={handleThemeChange}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sustainable-green">Sustainable Green</SelectItem>
+                    <SelectItem value="security-red">Security Red</SelectItem>
+                    <SelectItem value="futuristic-purple">Futuristic Purple</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button variant="secondary" size="sm" className="ml-4">
                   Log in
-                </Button> */}
-                <Button>Get Started</Button>
+                </Button>
+                <Button onClick={() => setIsModalOpen(true)} className="bg-primary text-primary-foreground">
+                  Get Started
+                </Button>
               </div>
             </div>
             <button className="md:hidden p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(true)}>
@@ -68,7 +97,7 @@ const Navbar = () => {
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-8">
-                  <Link href="/" className="text-xl font-bold text-secondary">
+                  <Link href="/" className="text-xl font-bold text-primary">
                     EUCLID
                   </Link>
                   <button className="p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(false)}>
@@ -91,11 +120,29 @@ const Navbar = () => {
                   <MobileNavLink href="/collaborations" onClick={() => setIsOpen(false)}>
                     Collaborations
                   </MobileNavLink>
+                  <Select value={theme} onValueChange={handleThemeChange}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sustainable-green">Sustainable Green</SelectItem>
+                      <SelectItem value="security-red">Security Red</SelectItem>
+                      <SelectItem value="futuristic-purple">Futuristic Purple</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <div className="pt-6 border-t border-gray-100">
-                    {/* <Button variant="outline" className="w-full mb-4">
+                    <Button variant="secondary" className="w-full mb-4">
                       Log in
-                    </Button> */}
-                    <Button className="w-full">Get Started</Button>
+                    </Button>
+                    <Button
+                      className="w-full bg-primary text-primary-foreground"
+                      onClick={() => {
+                        setIsOpen(false)
+                        setIsModalOpen(true)
+                      }}
+                    >
+                      Get Started
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -103,21 +150,27 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
+
+      {/* Service Inquiry Form Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-3xl font-bold mb-6">Service Inquiry Form</h2>
+        <ServiceInquiryForm />
+      </Modal>
     </>
   )
 }
 
 const NavLink = ({ href, children }: {href: string, children: string}) => (
-  <Link href={href} className="text-gray-600 hover:text-secondary font-medium transition-colors">
+  <Link href={href} className="text-gray-600 hover:text-primary font-medium transition-colors">
     {children}
   </Link>
 )
 
-const MobileNavLink = ({ href, children, onClick }: {href: string, children: string, onClick: any}) => (
+const MobileNavLink = ({ href, children, onClick }: {href: string, children: string, onClick: () => void}) => (
   <Link
     href={href}
     onClick={onClick}
-    className="text-lg font-medium text-gray-600 hover:text-secondary transition-colors"
+    className="text-lg font-medium text-gray-600 hover:text-primary transition-colors"
   >
     {children}
   </Link>

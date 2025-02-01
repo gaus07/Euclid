@@ -1,13 +1,24 @@
 "use client"
 
 import { motion } from "framer-motion"
-import  Card  from "@/components/Card"
 import Accordion from "@/components/Accordion"
-import { Button } from "@/components/ui/button"
+import { ThreeDCard } from "@/components/3DCard"
+import lan from "@/public/landing-page.png"
+
+const ProjectCard = ({ title, description, image, url }: { title: string; description: string; image: any; url: string }) => {
+  return (
+    <ThreeDCard
+      title={title}
+      description={description}
+      image={image}
+      url={url}
+    />
+  );
+};
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-secondary dark:bg-gray-900">
       {/* Current Projects Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -19,21 +30,24 @@ export default function Projects() {
           >
             Our Projects
           </motion.h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
             <ProjectCard
               title="Haschain"
               description="Anti-counterfeiting blockchain for product verification."
-              image="/placeholder.svg?height=200&width=300"
+              image={lan}
+              url="#"
             />
             <ProjectCard
               title="Carbon Credit Transfer"
               description="Decentralized carbon trading platform."
-              image="/placeholder.svg?height=200&width=300"
+              image={lan}
+              url="#"
             />
             <ProjectCard
               title="AnyNFT"
               description="Artisan-friendly NFT marketplace."
-              image="/placeholder.svg?height=200&width=300"
+              image={lan}
+              url="#"
             />
           </div>
         </div>
@@ -68,11 +82,11 @@ export default function Projects() {
   )
 }
 
-const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => {
-  return (
-    <Card title={title} description={description} image={image}>
-      <Button className="mt-4">Learn More</Button>
-    </Card>
-  )
-}
+// const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => {
+//   return (
+//     <Card title={title} description={description} image={image}>
+//       <Button className="mt-4">Learn More</Button>
+//     </Card>
+//   )
+// }
 

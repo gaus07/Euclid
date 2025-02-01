@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Achievements() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-secondary dark:bg-gray-900">
       {/* Publications Table */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -24,7 +24,7 @@ export default function Achievements() {
             </CardHeader>
             <CardContent>
               <Table>
-                <TableHeader>
+                <TableHeader className="bg-primary/10">
                   <TableRow>
                     <TableHead>Title</TableHead>
                     <TableHead>Conference/Journal</TableHead>
@@ -61,7 +61,7 @@ export default function Achievements() {
       </section>
 
       {/* Awards & Milestones */}
-      <section className="py-16 bg-white dark:bg-gray-800">
+      <section className="py-16 bg-card dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Awards & Milestones</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -79,7 +79,7 @@ const AchievementCard = ({ title, description }: { title: string; description: s
     <Card>
       <CardContent className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-gray-700 dark:text-gray-300">{description}</p>
+        <p className="text-secondary-foreground dark:text-gray-300">{description}</p>
       </CardContent>
     </Card>
   )

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export default function TrainingEvents() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-secondary dark:bg-gray-900">
       {/* Upcoming Events Calendar */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -44,13 +44,13 @@ export default function TrainingEvents() {
 
 const EventCard = ({ title, date, venue }: { title: string; date: string; venue: string }) => {
   return (
-    <Card>
+    <Card className="bg-card">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-700 dark:text-gray-300 mb-2">Date: {date}</p>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">Venue: {venue}</p>
+        <p className="text-secondary-foreground mb-2">Date: {date}</p>
+        <p className="text-secondary-foreground mb-4">Venue: {venue}</p>
         <Button>Register Now</Button>
       </CardContent>
     </Card>
@@ -61,10 +61,9 @@ const GalleryItem = ({ image, caption }: { image: string; caption: string }) => 
   return (
     <div className="relative">
       <img src={image || "/placeholder.svg"} alt={caption} className="w-full h-64 object-cover rounded-lg" />
-      <p className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg text-sm">
-        {caption}
-      </p>
+      <p className="absolute bottom-0 left-0 right-0 bg-primary/80 text-primary p-2 rounded-b-lg text-sm">{caption}</p>
     </div>
   )
 }
+
 

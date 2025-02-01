@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Collaborations() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-secondary dark:bg-gray-900">
       {/* Industry Partners */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -31,12 +31,12 @@ export default function Collaborations() {
       <section className="py-16 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Case Study</h2>
-          <Card>
+          <Card className="bg-card">
             <CardHeader>
               <CardTitle>Cyber Peace Foundation Partnership</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-700 dark:text-gray-300">
+              <p className="text-secondary-foreground dark:text-gray-300">
                 Our partnership with Cyber Peace Foundation focuses on enhancing blockchain security. Together, we're
                 developing cutting-edge solutions to protect against emerging threats in the blockchain space.
               </p>
@@ -49,7 +49,7 @@ export default function Collaborations() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Academia Visits</h2>
-          <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+          <ul className="list-disc list-inside text-secondary-foreground dark:text-gray-300">
             <li>SIES Graduate School (30 Oct 2024)</li>
             <li>St. John College (4 Sept 2024)</li>
           </ul>
@@ -61,9 +61,11 @@ export default function Collaborations() {
 
 const PartnerLogo = ({ name, logo }: { name: string; logo: string }) => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center bg-card">
       <img src={logo || "/placeholder.svg"} alt={name} className="max-w-full h-auto" />
     </div>
   )
 }
+
+
 

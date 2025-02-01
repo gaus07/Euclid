@@ -5,14 +5,14 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-[#F8FAFF] to-white">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-secondary to-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-secondary leading-tight">
-                Sustainability and Security of Blockchain Network
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> */}
+            <div className="space-y-8 flex flex-col items-center">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-tight text-center">
+                Center of Sustainable And Secure Blockchain Development
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600">
+              <p className="text-lg sm:text-xl text-secondary-foreground">
                 Pioneering ethical blockchain solutions for a secure, sustainable future at Somaiya Vidyavihar
                 University.
               </p>
@@ -20,23 +20,23 @@ export default function Home() {
                 <Link href="/projects">Get the best solutions</Link>
               </Button>
             </div>
-            <div className="relative">
-              <img
+            {/* <div className="relative"> */}
+              {/* <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hxNe18EgbBqPP7KGTcdiz7aA7zSeCI.png"
                 alt="Blockchain visualization"
                 className="rounded-2xl shadow-2xl w-full"
-              />
-              <div className="absolute -z-10 top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-              <div className="absolute -z-10 bottom-0 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
-            </div>
-          </div>
+              /> */}
+              {/* <div className="absolute -z-10 top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div> */}
+              {/* <div className="absolute -z-10 bottom-0 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div> */}
+            {/* </div> */}
+          {/* </div> */}
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-secondary mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-primary mb-12">
             Get the right protection to keep moving forward
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -57,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-24 bg-[#F8FAFF]">
+      <section className="py-16 md:py-24 bg-secondary">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <StatCard number="₹1 Cr" label="Seed Grant Funding" />
@@ -72,16 +72,16 @@ export default function Home() {
 }
 
 const FeatureCard = ({ title, description }: {title: string, description: string}) => (
-  <div className="p-6 rounded-xl bg-[#F8FAFF] hover:shadow-lg transition-shadow">
-    <h3 className="text-xl font-semibold text-secondary mb-3">{title}</h3>
-    <p className="text-gray-600">{description}</p>
+  <div className="p-6 rounded-xl bg-secondary hover:shadow-lg transition-shadow">
+    <h3 className="text-xl font-semibold text-primary mb-3">{title}</h3>
+    <p className="text-secondary-foreground">{description}</p>
   </div>
 )
 
 const StatCard = ({ number, label }: {number: string, label: string}) => (
   <div className="text-center p-6">
     <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{number}</div>
-    <div className="text-gray-600">{label}</div>
+    <div className="text-secondary-foreground">{label}</div>
   </div>
 )
 
