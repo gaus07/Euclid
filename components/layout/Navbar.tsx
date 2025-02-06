@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-secondary/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100">
+      <nav className="bg-secondary/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100 font-sans">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
@@ -49,7 +49,7 @@ const Navbar = () => {
               <div className="ml-10 flex items-center space-x-8">
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
-                <NavLink href="/achievements">Achievements</NavLink>
+                {/* <NavLink href="/achievements">Achievements</NavLink> */}
                 <NavLink href="/training-events">Training & Events</NavLink>
                 <NavLink href="/collaborations">Collaborations</NavLink>
                 <Select value={theme} onValueChange={handleThemeChange}>
@@ -62,6 +62,7 @@ const Navbar = () => {
                     <SelectItem value="futuristic-purple">Futuristic Purple</SelectItem>
                   </SelectContent>
                 </Select>
+                {/* <AuthButton /> */}
                 <Button variant="secondary" size="sm" className="ml-4">
                   Log in
                 </Button>
@@ -111,9 +112,9 @@ const Navbar = () => {
                   <MobileNavLink href="/projects" onClick={() => setIsOpen(false)}>
                     Projects
                   </MobileNavLink>
-                  <MobileNavLink href="/achievements" onClick={() => setIsOpen(false)}>
+                  {/* <MobileNavLink href="/achievements" onClick={() => setIsOpen(false)}>
                     Achievements
-                  </MobileNavLink>
+                  </MobileNavLink> */}
                   <MobileNavLink href="/training-events" onClick={() => setIsOpen(false)}>
                     Training & Events
                   </MobileNavLink>

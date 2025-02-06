@@ -29,19 +29,6 @@ const schema = z.object({
   projectType: z.enum(["Public Blockchain", "Private Blockchain", "Consortium Blockchain", "Hybrid Solution"]),
   projectTitle: z.string().min(2, "Project title is required"),
   technicalRequirements: z.string().min(10, "Technical requirements must be at least 10 characters"),
-  technicalDocument: z
-    .instanceof(FileList)
-    .refine((files) => files.length > 0, "Technical document is required")
-    .refine((files) => files[0]?.size <= MAX_FILE_SIZE, "Max file size is 5MB")
-    .refine(
-      (files) =>
-        [
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ].includes(files[0]?.type),
-      "Only PDF, DOC, and DOCX files are allowed",
-    ),
   estimatedBudget: z.enum(["₹10L - ₹25L", "₹25L - ₹50L", "₹50L - ₹1Cr", "1Cr+"]),
   projectTimeline: z.enum(["1-3 Months", "3-6 Months", "6-12 Months"]),
 })
@@ -202,21 +189,6 @@ export function ServiceInquiryForm() {
             />
             {errors.technicalRequirements && (
               <p className="text-red-500 text-sm mt-1">{errors.technicalRequirements.message}</p>
-            )}
-          </div>
-          <div>
-            <Label htmlFor="technicalDocument" className="block text-sm font-medium text-card-foreground mb-1">
-              Upload Technical Document
-            </Label>
-            <Input
-              id="technicalDocument"
-              type="file"
-              accept=".pdf,.doc,.docx"
-              {...register("technicalDocument")}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-background"
-            />
-            {errors.technicalDocument && (
-              <p className="text-red-500 text-sm mt-1">{errors.technicalDocument.message}</p>
             )}
           </div>
         </div>

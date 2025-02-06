@@ -4,5 +4,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="w-full">{children}</div>;
+  return <div className="w-full font-sans">{children}</div>;
 }

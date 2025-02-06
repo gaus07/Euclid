@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import Accordion from "@/components/Accordion"
 import { ThreeDCard } from "@/components/3DCard"
+import { BookOpen, Brain, Building2, ChevronRight, GraduationCap } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
 import lan from "@/public/landing-page.png"
 
 const ProjectCard = ({ title, description, image, url }: { title: string; description: string; image: any; url: string }) => {
@@ -18,12 +20,14 @@ const ProjectCard = ({ title, description, image, url }: { title: string; descri
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-secondary dark:bg-gray-900">
+    <div className="min-h-screen">
+      <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+
       {/* Current Projects Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.h1
-            className="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white"
+            className="text-4xl font-bold text-center mb-8 text-primary"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -53,29 +57,56 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* Ongoing Projects Section */}
-      <section className="py-16 bg-white dark:bg-gray-800">
+      {/* Ongoing Projects */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Ongoing Projects</h2>
-          <Accordion title="Optimize energy use in mining rigs">
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Our team is working on innovative solutions to reduce energy consumption in blockchain mining operations.
-            </p>
-            <div className="bg-gray-200 dark:bg-gray-700 h-4 rounded-full overflow-hidden">
-              <div className="bg-primary dark:bg-secondary h-full rounded-full" style={{ width: "70%" }}></div>
+          <h2 className="text-3xl font-bold mb-12 text-center">Ongoing Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <OngoingProjectCard
+              title="Bitcoin Transaction Analysis"
+              description="Advanced analytics for cryptocurrency transactions"
+            />
+            <OngoingProjectCard
+              title="Carbon Credit Transfer"
+              description="Blockchain-based platform for carbon credit trading"
+            />
+            <OngoingProjectCard title="AnyNFT" description="Blockchain solution for digital asset management" />
+            <OngoingProjectCard
+              title="Smart Contract Assessment"
+              description="Vulnerability detection and security analysis"
+            />
+            <OngoingProjectCard title="Sustainable Blockchain" description="Energy-efficient private blockchain network" />
+            <OngoingProjectCard title="Zero Day Attack Detection" description="Advanced security threat detection system" />
+          </div>
+        </div>
+      </section>
+
+      {/* Future Development */}
+      <section className="py-16 bg-secondary/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Future Development</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Building2 className="h-6 w-6" /> Industry Outcomes
+              </h3>
+              <ul className="space-y-4">
+                <FutureItem>Advanced Blockchain Platform Development</FutureItem>
+                <FutureItem>Comprehensive Security Assessment Framework</FutureItem>
+                <FutureItem>Publication of Security Advisories</FutureItem>
+              </ul>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Energy savings: 70%</p>
-          </Accordion>
-          <Accordion title="Zero-day attack detection">
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Developing advanced algorithms to detect and prevent zero-day attacks on blockchain networks.
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Implement machine learning models for anomaly detection</li>
-              <li>Create a decentralized alert system for rapid response</li>
-              <li>Collaborate with security researchers for continuous improvement</li>
-            </ul>
-          </Accordion>
+            <div>
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <GraduationCap className="h-6 w-6" /> Academic Outcomes
+              </h3>
+              <ul className="space-y-4">
+                <FutureItem>Security Threat Taxonomy for Blockchain</FutureItem>
+                <FutureItem>Zero Day Attack Vector Detection</FutureItem>
+                <FutureItem>Enhanced Blockchain Education Programs</FutureItem>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -90,3 +121,18 @@ export default function Projects() {
 //   )
 // }
 
+const OngoingProjectCard = ({ title, description }: { title: string; description: string }) => (
+  <Card>
+    <CardContent className="p-6">
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </CardContent>
+  </Card>
+)
+
+const FutureItem = ({ children }: { children: React.ReactNode }) => (
+  <li className="flex items-center gap-2">
+    <ChevronRight className="h-5 w-5 text-primary" />
+    <span className="text-muted-foreground">{children}</span>
+  </li>
+)

@@ -66,7 +66,7 @@ module.exports = {
 		  sm: "calc(var(--radius) - 4px)",
 		},
 		fontFamily: {
-		  sans: ["Inter", "sans-serif"],
+		  sans: ["Space Grotesk", "sans-serif"],
 		},
 	  },
 	},

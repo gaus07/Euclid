@@ -6,7 +6,7 @@ import { Mail, Phone, MapPin } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary border-t border-primary/20">
+    <footer className="border-t border-primary/20 font-sans">
       <div className="max-w-7xl mx-auto py-16 px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
@@ -48,7 +48,7 @@ const Footer = () => {
             <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Contact Us</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-secondary mt-0.5" />
+                <MapPin className="w-5 h-5 text-primary mt-0.5" />
                 <p className="text-secondary-foreground">
                   Somaiya Vidyavihar University
                   <br />
@@ -56,13 +56,13 @@ const Footer = () => {
                 </p>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-secondary" />
+                <Mail className="w-5 h-5 text-primary" />
                 <a href="mailto:info@euclid.edu" className="text-secondary-foreground hover:text-secondary">
                   info@euclid.edu
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-secondary" />
+                <Phone className="w-5 h-5 text-primary" />
                 <a href="tel:+911234567890" className="text-secondary-foreground hover:text-secondary">
                   +91 123 456 7890
                 </a>

@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button"
 
 export default function TrainingEvents() {
   return (
-    <div className="min-h-screen bg-secondary dark:bg-gray-900">
+    <div className="min-h-screen">
+            <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
       {/* Upcoming Events Calendar */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.h1
-            className="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white"
+            className="text-4xl font-bold text-center mb-8 text-primary"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -26,7 +27,7 @@ export default function TrainingEvents() {
       </section>
 
       {/* Past Events Gallery */}
-      <section className="py-16 bg-white dark:bg-gray-800">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Past Events Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

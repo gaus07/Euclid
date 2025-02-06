@@ -14,7 +14,7 @@ const Chart = () => {
       case "futuristic-purple":
         return ["#6366f1", "#3490fc", "#a377ff"]
       default:
-        return ["#15803d", "#00b4d8", "#0077b6"]
+        return ["#34d399", "#00b4d8", "#0077b6"]
     }
   }
 
