@@ -3,55 +3,53 @@
 import { motion } from "framer-motion"
 import Accordion from "@/components/Accordion"
 import { ThreeDCard } from "@/components/3DCard"
-import { BookOpen, Brain, Building2, ChevronRight, GraduationCap } from "lucide-react"
+import { BookOpen, Brain, Building2, ChevronRight, GraduationCap, Database, LineChart, Wallet } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import ProjectCard from "@/components/ProjectCard"
 import lan from "@/public/landing-page.png"
 
-const ProjectCard = ({ title, description, image, url }: { title: string; description: string; image: any; url: string }) => {
-  return (
-    <ThreeDCard
-      title={title}
-      description={description}
-      image={image}
-      url={url}
-    />
-  );
-};
+// const ProjectCard = ({ title, description, image, url }: { title: string; description: string; image: any; url: string }) => {
+//   return (
+//     <ThreeDCard
+//       title={title}
+//       description={description}
+//       image={image}
+//       url={url}
+//     />
+//   );
+// };
 
 export default function Projects() {
   return (
-    <div className="min-h-screen">
-      <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+    <div className="min-h-screen font-sans">
+      <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
 
       {/* Current Projects Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.h1
-            className="text-4xl font-bold text-center mb-8 text-primary"
+            className="text-4xl font-bold text-center mb-12 text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             Our Projects
           </motion.h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+          <div className="grid mt-32 grid-cols-1 md:grid-cols-3 gap-8">
             <ProjectCard
-              title="Haschain"
-              description="Anti-counterfeiting blockchain for product verification."
-              image={lan}
-              url="#"
+              title="Backoffice Systems"
+              description="Advanced blockchain infrastructure management and monitoring systems for enterprise-level operations."
+              icon={<Database className="w-8 h-8 text-primary" />}
             />
             <ProjectCard
-              title="Carbon Credit Transfer"
-              description="Decentralized carbon trading platform."
-              image={lan}
-              url="#"
+              title="Trading Platform"
+              description="Secure and efficient trading platform with real-time analytics and advanced order types."
+              icon={<LineChart className="w-8 h-8 text-primary" />}
             />
             <ProjectCard
-              title="AnyNFT"
-              description="Artisan-friendly NFT marketplace."
-              image={lan}
-              url="#"
+              title="Exchange, ICO & Wallet"
+              description="Comprehensive solution for digital asset management, token launches, and secure storage."
+              icon={<Wallet className="w-8 h-8 text-primary" />}
             />
           </div>
         </div>

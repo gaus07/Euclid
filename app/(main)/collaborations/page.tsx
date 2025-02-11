@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Collaborations() {
   return (
-    <div className="min-h-screen">
-            <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+    <div className="min-h-screen font-sans">
+            <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Industry Partners */}
       <section className="py-16">
         <div className="container mx-auto px-4">

@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 
 export default function TrainingEvents() {
   return (
-    <div className="min-h-screen">
-            <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+    <div className="min-h-screen font-sans">
+            <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Upcoming Events Calendar */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -32,7 +32,7 @@ export default function TrainingEvents() {
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">Past Events Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <GalleryItem
-              image="/placeholder.svg?height=300&width=400"
+              image="/images/Training_Events/image2.jpg"
               caption="33 AIML students from St. John College visited EUCLID (4 Sept 2024)"
             />
             {/* Add more gallery items here */}
@@ -61,7 +61,7 @@ const EventCard = ({ title, date, venue }: { title: string; date: string; venue:
 const GalleryItem = ({ image, caption }: { image: string; caption: string }) => {
   return (
     <div className="relative">
-      <img src={image || "/placeholder.svg"} alt={caption} className="w-full h-64 object-cover rounded-lg" />
+      <img src={image || "/placeholder.svg"} alt={caption} className="w-full h-full object-cover rounded-lg" />
       <p className="absolute bottom-0 left-0 right-0 bg-primary/80 text-primary p-2 rounded-b-lg text-sm">{caption}</p>
     </div>
   )

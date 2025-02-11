@@ -2,17 +2,21 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+// import { useSession, signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Modal } from "../Modal"
 import { ServiceInquiryForm } from "../ServiceInquiryForm"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Image from "next/image"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [theme, setTheme] = useState("sustainable-green")
+  // const { data: session } = useSession()
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "sustainable-green"
@@ -42,7 +46,14 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <Link href="/" className="text-xl font-bold text-primary">
-                EUCLID
+                <Image
+                  src="/euclid.png"
+                  alt="EUCLID Logo"
+                  width={120}
+                  height={40}
+                  className="object-contain"
+                  priority
+                />
               </Link>
             </div>
             <div className="hidden md:block">
@@ -50,23 +61,26 @@ const Navbar = () => {
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
                 {/* <NavLink href="/achievements">Achievements</NavLink> */}
-                <NavLink href="/training-events">Training & Events</NavLink>
+                <NavLink href="/training-events">Training&nbsp;&amp; Events</NavLink>
                 <NavLink href="/collaborations">Collaborations</NavLink>
                 <Select value={theme} onValueChange={handleThemeChange}>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select theme" />
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Theme" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="sustainable-green">Sustainable Green</SelectItem>
-                    <SelectItem value="security-red">Security Red</SelectItem>
-                    <SelectItem value="futuristic-purple">Futuristic Purple</SelectItem>
+                  <SelectContent className="w-[150px]">
+                    <SelectItem value="sustainable-green">Green</SelectItem>
+                    <SelectItem value="security-red">Red</SelectItem>
+                    <SelectItem value="futuristic-purple">Purple</SelectItem>
                   </SelectContent>
                 </Select>
                 {/* <AuthButton /> */}
-                <Button variant="secondary" size="sm" className="ml-4">
+                <Button size="sm" className="ml-4 hover:opacity-90 transition-opacity bg-primary">
                   Log in
                 </Button>
-                <Button onClick={() => setIsModalOpen(true)} className="bg-primary text-primary-foreground">
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  className="hover:opacity-90 transition-opacity bg-primary"
+                >
                   Get Started
                 </Button>
               </div>
@@ -132,11 +146,11 @@ const Navbar = () => {
                     </SelectContent>
                   </Select>
                   <div className="pt-6 border-t border-gray-100">
-                    <Button variant="secondary" className="w-full mb-4">
+                    <Button className="w-full mb-4 hover:opacity-90 transition-opacity bg-primary">
                       Log in
                     </Button>
                     <Button
-                      className="w-full bg-primary text-primary-foreground"
+                      className="w-full hover:opacity-90 transition-opacity bg-primary"
                       onClick={() => {
                         setIsOpen(false)
                         setIsModalOpen(true)
@@ -161,13 +175,13 @@ const Navbar = () => {
   )
 }
 
-const NavLink = ({ href, children }: {href: string, children: string}) => (
+const NavLink = ({ href, children }: { href: string; children: string }) => (
   <Link href={href} className="text-gray-600 hover:text-primary font-medium transition-colors">
     {children}
   </Link>
 )
 
-const MobileNavLink = ({ href, children, onClick }: {href: string, children: string, onClick: () => void}) => (
+const MobileNavLink = ({ href, children, onClick }: { href: string; children: string; onClick: () => void }) => (
   <Link
     href={href}
     onClick={onClick}

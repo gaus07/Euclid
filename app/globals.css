@@ -1,11 +1,12 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"); */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --gradient-start: #E8F4EE;
   --background: #ffffff;
   --foreground: #15803d;
   --card: #ffffff;
@@ -29,6 +30,7 @@
 }
 
 .dark {
+  --gradient-start: #1A2E25;
   --background: #1a1a1a;
   --foreground: #dcfce7;
   --card: #262626;
@@ -51,6 +53,7 @@
 }
 
 [data-theme="security-red"] {
+  --gradient-start: #FCE8E8;
   --background: #ffffff;
   --foreground: #dc2626;
   --card: #ffffff;
@@ -73,6 +76,7 @@
 }
 
 [data-theme="futuristic-purple"] {
+  --gradient-start: #EFE8FC;
   --background: #ffffff;
   --foreground: #6366f1;
   --card: #ffffff;
@@ -94,10 +98,18 @@
   --ring: #6366f1;
 }
 
+[data-theme="security-red"].dark {
+  --gradient-start: #2E1A1A; /* Dark red variant */
+}
+
+[data-theme="futuristic-purple"].dark {
+  --gradient-start: #1A1A2E; /* Dark purple variant */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: sans-ser;
+  /* font-family: sans-ser; */
 }
 
 @layer base {

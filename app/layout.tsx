@@ -19,10 +19,12 @@ export default function RootLayout({
   return (
     <html  lang="en" className="font-sans">
       <body className={`${inter.className} min-h-screen flex flex-col -z-50`}>
-        <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+        {/* <SessionProvider> */}
+        <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
         <Footer />
+        {/* </SessionProvider> */}
       </body>
     </html>
   )

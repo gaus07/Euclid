@@ -8,16 +8,16 @@ const Home = async() => {
   // if (!session) redirect("/sign-in") 
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-sans">
       {/* Hero Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> */}
             <div className="space-y-8 flex flex-col items-center">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight text-center">
-              C<ColourfulText text="E" />NTER OF S<ColourfulText text="U" />STAINABLE AND SE<ColourfulText text="C" />URE B<ColourfulText text="L" />OCKCHAIN <ColourfulText text="D" />EVELOPMENT
+              C<ColourfulText text="E" />NTER OF S<ColourfulText text="U" />STAINABLE AND SE<ColourfulText text="C" />URE <br /> B<ColourfulText text="L" />OCKCHAIN <ColourfulText text="D" />EVELOPMENT
               </h1>
-              <p className="text-lg sm:text-xl text-secondary-foreground">
+              <p className="text-lg sm:text-xl text-secondary-foreground ">
                 Pioneering ethical blockchain solutions for a secure, sustainable future at Somaiya Vidyavihar
                 University.
               </p>

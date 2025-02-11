@@ -10,8 +10,8 @@ import { Timeline } from "@/components/ui/timeline"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      <div className="absolute w-full h-full bg-gradient-to-b from-secondary to-background -z-50"></div>
+    <div className="min-h-screen font-sans">
+      <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Hero Section */}
       <section className="relative bg-secondary/50 py-16">
         <div className="container mx-auto px-4">
@@ -62,7 +62,7 @@ export default function AboutPage() {
             </div>
             <div>
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-uaSqYHhnRtQU59Z8XItV1rticYX1ye.png"
+                src="/images/About/about_image.jpeg"
                 alt="Team collaboration"
                 className="rounded-lg shadow-lg"
               />
@@ -108,29 +108,29 @@ export default function AboutPage() {
             <TeamMemberCard
               name="Dr. Irfan Siddavatam"
               role="Principal Investigator"
-              image="/placeholder.svg?height=400&width=400"
+              image="/images/About/irfan.jpg"
             />
             <TeamMemberCard
               name="Prof. Ashwini Dalvi"
               role="Co-Principal Investigator"
-              image="/placeholder.svg?height=400&width=400"
+              image="/images/About/ashwini.png"
             />
             <TeamMemberCard
               name="Prof. Sagar Korde"
               role="Co-Principal Investigator"
-              image="/placeholder.svg?height=400&width=400"
+              image="/images/About/sagar.jpg"
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <TeamMemberCard
               name="Mr. Chandan Kolvenkar"
               role="Ph.D. Scholar"
-              image="/placeholder.svg?height=400&width=400"
+              image="/images/About/chandan.jpg"
             />
             <TeamMemberCard
               name="Mr. Abhijeet Pasi"
               role="Ph.D. Scholar"
-              image="/placeholder.svg?height=400&width=400"
+              image="/images/About/abhijeet.jpg"
             />
           </div>
         </div>
@@ -265,7 +265,7 @@ const ObjectiveCard = ({
 const TeamMemberCard = ({ name, role, image }: { name: string; role: string; image: string }) => (
   <Card>
     <CardContent className="p-0">
-      <img src={image || "/placeholder.svg"} alt={name} className="w-full h-48 object-cover" />
+      <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-fill" />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-1">{name}</h3>
         <p className="text-muted-foreground">{role}</p>
