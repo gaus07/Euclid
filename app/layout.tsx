@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import type React from "react"
-import { SessionProvider } from "next-auth/react"
+
 const inter = Inter()
 
 export const metadata = {

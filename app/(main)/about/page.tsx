@@ -7,6 +7,7 @@ import { BookOpen, Brain, Building2, ChevronRight, GraduationCap, LineChart, Tar
 import Link from "next/link"
 import type React from "react" // Import React
 import { Timeline } from "@/components/ui/timeline"
+import { ImagePopup } from "@/components/ImagePopUp"
 
 export default function AboutPage() {
   return (
@@ -60,12 +61,8 @@ export default function AboutPage() {
                 </Card>
               </div>
             </div>
-            <div>
-              <img
-                src="/images/About/about_image.jpeg"
-                alt="Team collaboration"
-                className="rounded-lg shadow-lg"
-              />
+            <div className="relative aspect-video">
+              <ImagePopup src="/images/About/about_image.jpeg" alt="Team collaboration" width={800} height={600} />
             </div>
           </div>
         </div>

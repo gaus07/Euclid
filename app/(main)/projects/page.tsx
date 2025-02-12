@@ -1,23 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Accordion from "@/components/Accordion"
-import { ThreeDCard } from "@/components/3DCard"
 import { BookOpen, Brain, Building2, ChevronRight, GraduationCap, Database, LineChart, Wallet } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import ProjectCard from "@/components/ProjectCard"
-import lan from "@/public/landing-page.png"
-
-// const ProjectCard = ({ title, description, image, url }: { title: string; description: string; image: any; url: string }) => {
-//   return (
-//     <ThreeDCard
-//       title={title}
-//       description={description}
-//       image={image}
-//       url={url}
-//     />
-//   );
-// };
 
 export default function Projects() {
   return (
@@ -36,20 +22,20 @@ export default function Projects() {
             Our Projects
           </motion.h1>
           <div className="grid mt-32 grid-cols-1 md:grid-cols-3 gap-8">
-            <ProjectCard
+          <ProjectCard
               title="Backoffice Systems"
               description="Advanced blockchain infrastructure management and monitoring systems for enterprise-level operations."
-              icon={<Database className="w-8 h-8 text-primary" />}
+              image="/images/Training_Events/image1.jpg"
             />
             <ProjectCard
               title="Trading Platform"
               description="Secure and efficient trading platform with real-time analytics and advanced order types."
-              icon={<LineChart className="w-8 h-8 text-primary" />}
+              image="/images/Training_Events/image1.jpg"
             />
             <ProjectCard
               title="Exchange, ICO & Wallet"
               description="Comprehensive solution for digital asset management, token launches, and secure storage."
-              icon={<Wallet className="w-8 h-8 text-primary" />}
+              image="/images/Training_Events/image1.jpg"
             />
           </div>
         </div>
@@ -111,13 +97,6 @@ export default function Projects() {
   )
 }
 
-// const ProjectCard = ({ title, description, image }: { title: string; description: string; image: string }) => {
-//   return (
-//     <Card title={title} description={description} image={image}>
-//       <Button className="mt-4">Learn More</Button>
-//     </Card>
-//   )
-// }
 
 const OngoingProjectCard = ({ title, description }: { title: string; description: string }) => (
   <Card>
