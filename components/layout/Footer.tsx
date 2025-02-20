@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin } from "lucide-react"
+import Marquee from "../Marquee"
 
 const Footer = () => {
   return (
     <footer className="border-t border-primary/20 font-sans">
+      <Marquee />
       <div className="max-w-7xl mx-auto py-16 px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}

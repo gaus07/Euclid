@@ -26,11 +26,7 @@ const schema = z.object({
     "Enterprise Training",
     "Joint Research",
   ]),
-  projectType: z.enum(["Public Blockchain", "Private Blockchain", "Consortium Blockchain", "Hybrid Solution"]),
-  projectTitle: z.string().min(2, "Project title is required"),
-  technicalRequirements: z.string().min(10, "Technical requirements must be at least 10 characters"),
-  estimatedBudget: z.enum(["₹10L - ₹25L", "₹25L - ₹50L", "₹50L - ₹1Cr", "1Cr+"]),
-  projectTimeline: z.enum(["1-3 Months", "3-6 Months", "6-12 Months"]),
+  projectType: z.enum(["Public Blockchain", "Private Blockchain", "Consortium Blockchain", "Hybrid Solution"])
 })
 
 type FormData = z.infer<typeof schema>
@@ -160,87 +156,6 @@ export function ServiceInquiryForm() {
               )}
             />
             {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType.message}</p>}
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Project Specifications</h2>
-        <div className="space-y-6">
-          <div>
-            <Label htmlFor="projectTitle" className="block text-sm font-medium text-card-foreground mb-1">
-              Project Title
-            </Label>
-            <Input
-              id="projectTitle"
-              {...register("projectTitle")}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-background"
-            />
-            {errors.projectTitle && <p className="text-red-500 text-sm mt-1">{errors.projectTitle.message}</p>}
-          </div>
-          <div>
-            <Label htmlFor="technicalRequirements" className="block text-sm font-medium text-card-foreground mb-1">
-              Technical Requirements
-            </Label>
-            <Textarea
-              id="technicalRequirements"
-              {...register("technicalRequirements")}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-background"
-            />
-            {errors.technicalRequirements && (
-              <p className="text-red-500 text-sm mt-1">{errors.technicalRequirements.message}</p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Additional Information</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div>
-            <Label htmlFor="estimatedBudget" className="block text-sm font-medium text-card-foreground mb-1">
-              Estimated Budget
-            </Label>
-            <Controller
-              name="estimatedBudget"
-              control={control}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <SelectTrigger className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-background">
-                    <SelectValue placeholder="Select a budget range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="₹10L - ₹25L">₹10L - ₹25L</SelectItem>
-                    <SelectItem value="₹25L - ₹50L">₹25L - ₹50L</SelectItem>
-                    <SelectItem value="₹50L - ₹1Cr">₹50L - ₹1Cr</SelectItem>
-                    <SelectItem value="1Cr+">1Cr+</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            {errors.estimatedBudget && <p className="text-red-500 text-sm mt-1">{errors.estimatedBudget.message}</p>}
-          </div>
-          <div>
-            <Label htmlFor="projectTimeline" className="block text-sm font-medium text-card-foreground mb-1">
-              Project Timeline
-            </Label>
-            <Controller
-              name="projectTimeline"
-              control={control}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <SelectTrigger className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-background">
-                    <SelectValue placeholder="Select a timeline" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1-3 Months">1-3 Months</SelectItem>
-                    <SelectItem value="3-6 Months">3-6 Months</SelectItem>
-                    <SelectItem value="6-12 Months">6-12 Months</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            {errors.projectTimeline && <p className="text-red-500 text-sm mt-1">{errors.projectTimeline.message}</p>}
           </div>
         </div>
       </div>

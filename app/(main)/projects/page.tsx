@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { BookOpen, Brain, Building2, ChevronRight, GraduationCap, Database, LineChart, Wallet } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
 import ProjectCard from "@/components/ProjectCard"
 
 export default function Projects() {
@@ -21,7 +20,7 @@ export default function Projects() {
           >
             Our Projects
           </motion.h1>
-          <div className="grid mt-32 grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid mt-26 grid-cols-1 md:grid-cols-3 gap-8">
           <ProjectCard
               title="Backoffice Systems"
               description="Advanced blockchain infrastructure management and monitoring systems for enterprise-level operations."
@@ -99,12 +98,18 @@ export default function Projects() {
 
 
 const OngoingProjectCard = ({ title, description }: { title: string; description: string }) => (
-  <Card>
-    <CardContent className="p-6">
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </CardContent>
-  </Card>
+  <motion.div
+  className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300"
+  whileHover={{ y: -5 }}
+  transition={{ duration: 0.2 }}
+>
+  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+  <div className="relative z-20 p-6 h-full flex flex-col">
+    <h3 className="text-xl font-semibold text-primary mb-2">{title}</h3>
+    <p className="text-black text-sm flex-grow">{description}</p>
+  </div>
+</motion.div>
 )
 
 const FutureItem = ({ children }: { children: React.ReactNode }) => (

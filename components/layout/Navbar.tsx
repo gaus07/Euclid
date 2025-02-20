@@ -1,47 +1,53 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import Link from "next/link";
 // import { useSession, signOut } from "next-auth/react"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Modal } from "../Modal"
-import { ServiceInquiryForm } from "../ServiceInquiryForm"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Image from "next/image"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Modal } from "../Modal";
+import { ServiceInquiryForm } from "../ServiceInquiryForm";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Image from "next/image";
+// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [theme, setTheme] = useState("sustainable-green")
+  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [theme, setTheme] = useState("sustainable-green");
   // const { data: session } = useSession()
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "sustainable-green"
-    setTheme(savedTheme)
-    document.documentElement.setAttribute("data-theme", savedTheme)
-  }, [])
+    const savedTheme = localStorage.getItem("theme") || "sustainable-green";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
 
   const handleThemeChange = (newTheme: string) => {
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.setAttribute("data-theme", newTheme)
-  }
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset"
+      document.body.style.overflow = "unset";
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   return (
     <>
-      <nav className="bg-secondary/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-100 font-sans">
+      <nav className="bg-secondary/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 font-sans">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
@@ -61,7 +67,7 @@ const Navbar = () => {
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
                 {/* <NavLink href="/achievements">Achievements</NavLink> */}
-                <NavLink href="/training-events">Training&nbsp;&amp; Events</NavLink>
+                <NavLink href="/training-events">Events</NavLink>
                 <NavLink href="/collaborations">Collaborations</NavLink>
                 <Select value={theme} onValueChange={handleThemeChange}>
                   <SelectTrigger className="w-[150px]">
@@ -74,9 +80,14 @@ const Navbar = () => {
                   </SelectContent>
                 </Select>
                 {/* <AuthButton /> */}
-                <Button size="sm" className="ml-4 hover:opacity-90 transition-opacity bg-primary">
-                  Log in
-                </Button>
+                <Link href={"/login"}>
+                  <Button
+                    size="sm"
+                    className="ml-4 hover:opacity-90 transition-opacity bg-primary"
+                  >
+                    Log in
+                  </Button>
+                </Link>
                 <Button
                   onClick={() => setIsModalOpen(true)}
                   className="hover:opacity-90 transition-opacity bg-primary"
@@ -85,7 +96,10 @@ const Navbar = () => {
                 </Button>
               </div>
             </div>
-            <button className="md:hidden p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(true)}>
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+              onClick={() => setIsOpen(true)}
+            >
               <Menu className="h-6 w-6 text-gray-600" />
             </button>
           </div>
@@ -113,9 +127,19 @@ const Navbar = () => {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-8">
                   <Link href="/" className="text-xl font-bold text-primary">
-                    EUCLID
+                    <Image
+                      src="/euclid.png"
+                      alt="EUCLID Logo"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      priority
+                    />
                   </Link>
-                  <button className="p-2 rounded-lg hover:bg-gray-100" onClick={() => setIsOpen(false)}>
+                  <button
+                    className="p-2 rounded-lg hover:bg-gray-100"
+                    onClick={() => setIsOpen(false)}
+                  >
                     <X className="h-6 w-6 text-gray-600" />
                   </button>
                 </div>
@@ -123,16 +147,25 @@ const Navbar = () => {
                   <MobileNavLink href="/about" onClick={() => setIsOpen(false)}>
                     About
                   </MobileNavLink>
-                  <MobileNavLink href="/projects" onClick={() => setIsOpen(false)}>
+                  <MobileNavLink
+                    href="/projects"
+                    onClick={() => setIsOpen(false)}
+                  >
                     Projects
                   </MobileNavLink>
                   {/* <MobileNavLink href="/achievements" onClick={() => setIsOpen(false)}>
                     Achievements
                   </MobileNavLink> */}
-                  <MobileNavLink href="/training-events" onClick={() => setIsOpen(false)}>
-                    Training & Events
+                  <MobileNavLink
+                    href="/training-events"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Events
                   </MobileNavLink>
-                  <MobileNavLink href="/collaborations" onClick={() => setIsOpen(false)}>
+                  <MobileNavLink
+                    href="/collaborations"
+                    onClick={() => setIsOpen(false)}
+                  >
                     Collaborations
                   </MobileNavLink>
                   <Select value={theme} onValueChange={handleThemeChange}>
@@ -140,9 +173,13 @@ const Navbar = () => {
                       <SelectValue placeholder="Select theme" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sustainable-green">Sustainable Green</SelectItem>
+                      <SelectItem value="sustainable-green">
+                        Sustainable Green
+                      </SelectItem>
                       <SelectItem value="security-red">Security Red</SelectItem>
-                      <SelectItem value="futuristic-purple">Futuristic Purple</SelectItem>
+                      <SelectItem value="futuristic-purple">
+                        Futuristic Purple
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <div className="pt-6 border-t border-gray-100">
@@ -152,8 +189,8 @@ const Navbar = () => {
                     <Button
                       className="w-full hover:opacity-90 transition-opacity bg-primary"
                       onClick={() => {
-                        setIsOpen(false)
-                        setIsModalOpen(true)
+                        setIsOpen(false);
+                        setIsModalOpen(true);
                       }}
                     >
                       Get Started
@@ -172,16 +209,27 @@ const Navbar = () => {
         <ServiceInquiryForm />
       </Modal>
     </>
-  )
-}
+  );
+};
 
 const NavLink = ({ href, children }: { href: string; children: string }) => (
-  <Link href={href} className="text-gray-600 hover:text-primary font-medium transition-colors">
+  <Link
+    href={href}
+    className="text-gray-600 hover:text-primary font-medium transition-colors"
+  >
     {children}
   </Link>
-)
+);
 
-const MobileNavLink = ({ href, children, onClick }: { href: string; children: string; onClick: () => void }) => (
+const MobileNavLink = ({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: string;
+  onClick: () => void;
+}) => (
   <Link
     href={href}
     onClick={onClick}
@@ -189,7 +237,6 @@ const MobileNavLink = ({ href, children, onClick }: { href: string; children: st
   >
     {children}
   </Link>
-)
+);
 
-export default Navbar
-
+export default Navbar;

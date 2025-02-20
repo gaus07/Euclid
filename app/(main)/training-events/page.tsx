@@ -61,7 +61,7 @@ const EventCard = ({ title, date, venue }: { title: string; date: string; venue:
 const GalleryItem = ({ image, caption }: { image: string; caption: string }) => {
   return (
     <div className="relative">
-      <img src={image || "/placeholder.svg"} alt={caption} className="w-full h-full object-cover rounded-lg" />
+      {/* <img src={image || "/placeholder.svg"} alt={caption} className="w-full h-full object-cover rounded-lg" /> */}
       <p className="absolute bottom-0 left-0 right-0 bg-primary/80 text-primary p-2 rounded-b-lg text-sm">{caption}</p>
     </div>
   )

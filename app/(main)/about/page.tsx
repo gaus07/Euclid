@@ -8,6 +8,40 @@ import Link from "next/link"
 import type React from "react" // Import React
 import { Timeline } from "@/components/ui/timeline"
 import { ImagePopup } from "@/components/ImagePopUp"
+import Image from "next/image"
+
+const teamMembers = [
+  {
+    name: "Dr. Irfan Siddavatam",
+    role: "Principal Investigator",
+    bio: "Leading blockchain security research at Somaiya University. Former consultant at major tech firms.",
+    image: "/images/About/irfan.jpg",
+  },
+  {
+    name: "Prof. Ashwini Dalvi",
+    role: "Co-Principal Investigator",
+    bio: "Specializing in sustainable blockchain systems. Previously led research at top institutions.",
+    image: "/images/About/ashwini.png",
+  },
+  {
+    name: "Prof. Sagar Korde",
+    role: "Co-Principal Investigator",
+    bio: "Expert in blockchain architecture and security protocols. Industry veteran.",
+    image: "/images/About/sagar.jpg",
+  },
+  {
+    name: "Mr. Chandan Kolvenkar",
+    role: "Ph.D. Scholar",
+    bio: "Researching blockchain security vulnerabilities and mitigation strategies.",
+    image: "/images/About/chandan.jpg",
+  },
+  {
+    name: "Mr. Abhijeet Pasi",
+    role: "Ph.D. Scholar",
+    bio: "Focusing on sustainable mining solutions and energy optimization.",
+    image: "/images/About/abhijeet.jpg",
+  },
+]
 
 export default function AboutPage() {
   return (
@@ -45,20 +79,32 @@ export default function AboutPage() {
                 blockchain technology while prioritizing sustainability and security.
               </p>
               <div className="grid grid-cols-2 gap-6">
-                <Card>
-                  <CardContent className="p-6">
+              <motion.div
+                  className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+                  <div className="relative z-20 p-6 h-full flex flex-col">
                     <LineChart className="h-8 w-8 text-primary mb-4" />
-                    <h3 className="font-semibold mb-2">First Year Budget</h3>
-                    <p className="text-2xl font-bold">₹25L</p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-primary mb-2">First Year Budget</h3>
+                    <p className="text-2xl font-bold text-black">₹25L</p>
+                  </div>
+                </motion.div>
+                <motion.div
+                  className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+                  <div className="relative z-20 p-6 h-full flex flex-col">
                     <Users className="h-8 w-8 text-primary mb-4" />
-                    <h3 className="font-semibold mb-2">Team Members</h3>
-                    <p className="text-2xl font-bold">5+</p>
-                  </CardContent>
-                </Card>
+                    <h3 className="text-xl font-semibold text-primary mb-2">Team Members</h3>
+                    <p className="text-2xl font-bold text-black">5+</p>
+                  </div>
+                </motion.div>
               </div>
             </div>
             <div className="relative aspect-video">
@@ -98,37 +144,31 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16">
+      <section className="py-16 bg-secondary/5">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TeamMemberCard
-              name="Dr. Irfan Siddavatam"
-              role="Principal Investigator"
-              image="/images/About/irfan.jpg"
-            />
-            <TeamMemberCard
-              name="Prof. Ashwini Dalvi"
-              role="Co-Principal Investigator"
-              image="/images/About/ashwini.png"
-            />
-            <TeamMemberCard
-              name="Prof. Sagar Korde"
-              role="Co-Principal Investigator"
-              image="/images/About/sagar.jpg"
-            />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            <TeamMemberCard
-              name="Mr. Chandan Kolvenkar"
-              role="Ph.D. Scholar"
-              image="/images/About/chandan.jpg"
-            />
-            <TeamMemberCard
-              name="Mr. Abhijeet Pasi"
-              role="Ph.D. Scholar"
-              image="/images/About/abhijeet.jpg"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="relative aspect-square mb-4 rounded-2xl overflow-hidden bg-muted">
+                  <Image
+                    src={member.image || "/placeholder.svg"}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-center"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-1">{member.name}</h3>
+                <p className="text-primary font-medium mb-2">{member.role}</p>
+                <p className="text-muted-foreground text-sm">{member.bio}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -142,7 +182,7 @@ export default function AboutPage() {
               {
                 title: "2022-23",
                 content: (
-                  <div className="space-y-4 bg-card rounded-lg p-6 shadow-lg">
+                  <div className="space-y-4 p-6 overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md">
                     <h4 className="text-xl font-semibold text-primary">Key Milestones</h4>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-2">
@@ -174,7 +214,7 @@ export default function AboutPage() {
               {
                 title: "2023-24",
                 content: (
-                  <div className="space-y-4 bg-card rounded-lg p-6 shadow-lg">
+                  <div className="space-y-4 p-6 overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md">
                     <h4 className="text-xl font-semibold text-primary">Major Achievements</h4>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-2">
@@ -204,7 +244,7 @@ export default function AboutPage() {
               {
                 title: "2024-25",
                 content: (
-                  <div className="space-y-4 bg-card rounded-lg p-6 shadow-lg">
+                  <div className="space-y-4 p-6 overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md">
                     <h4 className="text-xl font-semibold text-primary">Future Goals</h4>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-2">
@@ -250,13 +290,19 @@ const ObjectiveCard = ({
   title: string
   description: string
 }) => (
-  <Card>
-    <CardContent className="p-6">
+  <motion.div
+    className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300"
+    whileHover={{ y: -5 }}
+    transition={{ duration: 0.2 }}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+    <div className="relative z-20 p-6 h-full flex flex-col">
       <Icon className="h-8 w-8 text-primary mb-4" />
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </CardContent>
-  </Card>
+      <h3 className="text-xl font-semibold text-primary mb-2">{title}</h3>
+      <p className="text-black text-sm flex-grow">{description}</p>
+    </div>
+  </motion.div>
 )
 
 const TeamMemberCard = ({ name, role, image }: { name: string; role: string; image: string }) => (

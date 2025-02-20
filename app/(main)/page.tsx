@@ -2,10 +2,22 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import ColourfulText from "@/components/ui/colourful-text"
 import { redirect } from "next/navigation"
+import { AcceptRequest } from "@/lib/adminQuery"
+import { getIronSession } from "iron-session"
+import { cookies, headers } from 'next/headers'; // Import headers
+import { sessionOptions } from "@/lib/sessionOptions"
 
 const Home = async() => {
   // const session = await auth()
   // if (!session) redirect("/sign-in") 
+
+  // const run = await AcceptRequest("testingbase07@gmail.com")
+  // console.log(run);
+
+  const cookiesData = await cookies();
+  const session = await getIronSession(cookiesData, sessionOptions);
+
+  console.log(session); // Should now contain user data
 
   return (
     <div className="min-h-screen font-sans">
