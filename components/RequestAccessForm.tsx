@@ -8,11 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 interface RequestAccessFormProps {
-  onSubmit: () => void;
   setShowRequestAccess: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function RequestAccessForm({ onSubmit, setShowRequestAccess }: RequestAccessFormProps) {
+export function RequestAccessForm({ setShowRequestAccess }: RequestAccessFormProps) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [otp, setOtp] = useState("");

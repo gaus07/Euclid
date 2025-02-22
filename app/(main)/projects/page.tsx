@@ -45,10 +45,10 @@ export default function Projects() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">Ongoing Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <OngoingProjectCard
+            {/* <OngoingProjectCard
               title="Bitcoin Transaction Analysis"
               description="Advanced analytics for cryptocurrency transactions"
-            />
+            /> */}
             <OngoingProjectCard
               title="Carbon Credit Transfer"
               description="Blockchain-based platform for carbon credit trading"
@@ -59,7 +59,7 @@ export default function Projects() {
               description="Vulnerability detection and security analysis"
             />
             <OngoingProjectCard title="Sustainable Blockchain" description="Energy-efficient private blockchain network" />
-            <OngoingProjectCard title="Zero Day Attack Detection" description="Advanced security threat detection system" />
+            {/* <OngoingProjectCard title="Zero Day Attack Detection" description="Advanced security threat detection system" /> */}
           </div>
         </div>
       </section>

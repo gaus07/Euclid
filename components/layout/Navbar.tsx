@@ -79,21 +79,6 @@ const Navbar = () => {
                     <SelectItem value="futuristic-purple">Purple</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* <AuthButton /> */}
-                <Link href={"/login"}>
-                  <Button
-                    size="sm"
-                    className="ml-4 hover:opacity-90 transition-opacity bg-primary"
-                  >
-                    Log in
-                  </Button>
-                </Link>
-                <Button
-                  onClick={() => setIsModalOpen(true)}
-                  className="hover:opacity-90 transition-opacity bg-primary"
-                >
-                  Get Started
-                </Button>
               </div>
             </div>
             <button
@@ -182,20 +167,6 @@ const Navbar = () => {
                       </SelectItem>
                     </SelectContent>
                   </Select>
-                  <div className="pt-6 border-t border-gray-100">
-                    <Button className="w-full mb-4 hover:opacity-90 transition-opacity bg-primary">
-                      Log in
-                    </Button>
-                    <Button
-                      className="w-full hover:opacity-90 transition-opacity bg-primary"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      Get Started
-                    </Button>
-                  </div>
                 </div>
               </div>
             </motion.div>

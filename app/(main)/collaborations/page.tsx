@@ -8,7 +8,7 @@ export default function Collaborations() {
     <div className="min-h-screen font-sans">
             <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Industry Partners */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.h1
             className="text-4xl font-bold text-center mb-8 text-primary"
@@ -26,23 +26,31 @@ export default function Collaborations() {
             <PartnerLogo name="Schneider Electric" logo="/placeholder.svg?height=100&width=200" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Case Study */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">Case Study</h2>
-          <Card className="bg-card">
-            <CardHeader>
-              <CardTitle>Cyber Peace Foundation Partnership</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-secondary-foreground dark:text-gray-300">
-                Our partnership with Cyber Peace Foundation focuses on enhancing blockchain security. Together, we're
-                developing cutting-edge solutions to protect against emerging threats in the blockchain space.
-              </p>
-            </CardContent>
-          </Card>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Case Study</h2>
+          <motion.div
+            className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300 relative"
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+            <div className="relative z-20">
+              <CardHeader>
+                <CardTitle>Cyber Peace Foundation Partnership</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-secondary-foreground dark:text-gray-300">
+                  Our partnership with Cyber Peace Foundation focuses on enhancing blockchain security. Together, we're
+                  developing cutting-edge solutions to protect against emerging threats in the blockchain space.
+                </p>
+              </CardContent>
+            </div>
+          </motion.div>
         </div>
       </section>
 

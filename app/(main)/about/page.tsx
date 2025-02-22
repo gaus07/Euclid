@@ -9,6 +9,7 @@ import type React from "react" // Import React
 import { Timeline } from "@/components/ui/timeline"
 import { ImagePopup } from "@/components/ImagePopUp"
 import Image from "next/image"
+import { Facebook, Linkedin, Mail, Twitter } from "lucide-react"
 
 const teamMembers = [
   {
@@ -147,26 +148,39 @@ export default function AboutPage() {
       <section className="py-16 bg-secondary/5">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
+                className="group relative bg-card rounded-xl overflow-hidden hover:shadow-sm transition-shadow duration-300"
               >
                 <div className="relative aspect-square mb-4 rounded-2xl overflow-hidden bg-muted">
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-1">{member.name}</h3>
-                <p className="text-primary font-medium mb-2">{member.role}</p>
-                <p className="text-muted-foreground text-sm">{member.bio}</p>
+                <motion.div
+                  className="p-4 bg-gradient-to-t from-background/90 to-background/50 backdrop-blur-sm relative z-10"
+                  initial={{ y: 0 }}
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
+                  <p className="text-primary font-medium mb-3">{member.role}</p>
+                  <p className="text-muted-foreground text-sm mb-3">{member.bio}</p>
+                  <div className="flex items-center gap-3">
+                    <SocialLink href="#" icon={Linkedin} label="LinkedIn" />
+                    <SocialLink href="#" icon={Twitter} label="Twitter" />
+                    <SocialLink href="#" icon={Facebook} label="Facebook" />
+                    <SocialLink href="#" icon={Mail} label="Email" />
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -342,3 +356,8 @@ const FutureItem = ({ children }: { children: React.ReactNode }) => (
   </li>
 )
 
+const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => (
+  <a href={href} className="text-muted-foreground hover:text-primary transition-colors duration-200" aria-label={label}>
+    <Icon className="h-5 w-5" />
+  </a>
+)

@@ -1,10 +1,7 @@
+import { getSession } from "@/actions/actions";
 import { prisma } from "@/lib/prisma";
-import { sessionOptions } from "@/lib/sessionOptions";
-import { getIronSession } from "iron-session";
-import { NextApiResponse } from "next";
-import { NextResponse } from "next/server";
 
-export async function POST(request: Request, response: NextApiResponse) {
+export async function POST(request: Request) {
   const { otp, email } = await request.json();
 
   if (!otp || !email) {
@@ -33,15 +30,10 @@ export async function POST(request: Request, response: NextApiResponse) {
     });
   }
 
-  const session = (await getIronSession(
-    request,
-    response,
-    sessionOptions
-  )) as any;
+  const session = await getSession();
 
-  session.user = { email: user.email, id: user.id, username: user.username };
-  // await session.save();
-  console.log(session);
+  session.user = {id: user.id, email: user.email, username: user.username};
+  await session.save();
   
 
   return new Response("Logged in successfully", {

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RequestAccessForm } from "@/components/RequestAccessForm";
 import { AcceptRequest } from "@/lib/adminQuery";
+import { useRouter } from "next/navigation";
 // import { sendEmail } from "@/lib/utils";
 
 export default function LoginPage() {
@@ -17,6 +18,7 @@ export default function LoginPage() {
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const router = useRouter()
 
 
   useEffect(() => {
@@ -29,9 +31,11 @@ export default function LoginPage() {
       //   body: JSON.stringify({
       //     email: "testingdev9594@gmail.com",
       //     subject: "Your OTP for admin access",
-      //     text: `Your OTP is ${123456}`,
+      //     text: Your OTP is ${123456},
       //   }),
       // });
+
+
     };
     send();
   }, []);
@@ -69,33 +73,9 @@ export default function LoginPage() {
       });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isOtpVerified) {
-      return;
-    }
-
-    await fetch("/api/update-username", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, username: username }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          setShowRequestAccess(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log("Logging in with email:", email);
-  };
-
   const handleRequestAccessSubmit = () => {
     // Handle request access logic here
-    console.log("Requesting access for email:", email);
+    router.replace("/");
     setShowRequestAccess(false);
   };
 
@@ -133,10 +113,9 @@ export default function LoginPage() {
           {showRequestAccess ? (
             <RequestAccessForm
               setShowRequestAccess={setShowRequestAccess}
-              onSubmit={handleRequestAccessSubmit}
             />
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleRequestAccessSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email">Email address</Label>
                 <div className="flex space-x-2">

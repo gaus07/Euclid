@@ -1,5 +1,11 @@
 import type { SessionOptions } from 'iron-session';
 
+export interface SessionData {
+    id: number;
+    email: string;
+    username?: string | null;   
+}
+
 export const sessionOptions: SessionOptions = {
     password: process.env.IRON_SESSION_SECRET!,
     cookieName: 'my-otp-app-session',
@@ -13,10 +19,6 @@ export const sessionOptions: SessionOptions = {
 
 declare module 'iron-session' {
     interface IronSessionData {
-        user?: {
-            id: number;
-            email: string;
-            username?: string;
-        };
+        user?: SessionData;
     }
 }

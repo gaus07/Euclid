@@ -1,42 +1,117 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, Shield, MessageSquare, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import LoginPage from './auth/login';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronDown,
+  Shield,
+  MessageSquare,
+  Send,
+  UserCircle,
+  LogOut,
+  UserCog2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import LoginPage from "./auth/login";
+import { getUser } from "@/actions/actions";
+import { SessionData } from "@/lib/sessionOptions";
+import { useRouter } from "next/navigation";
 
-type View = "admin" | "contact"
+type View = "admin" | "contact" | "profile";
 
 const adminSchema = z.object({
   username: z.string().min(1, "Username is required"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-})
+});
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
   message: z.string().min(10, "Message must be at least 10 characters"),
-})
+});
 
 export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [currentView, setCurrentView] = useState<View>("contact")
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<View>("contact");
+  const [session, setSession] = useState<SessionData | undefined>();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser();
+      setSession(user);
+    };
+    fetchData();
+  }, [router]);
 
   const getHeaderIcon = () => {
     switch (currentView) {
       case "admin":
-        return <Shield className="size-8 text-primary" />
+        return <Shield className="size-8 text-primary" />;
       case "contact":
-        return <MessageSquare className="size-8 text-primary" />
+        return <MessageSquare className="size-8 text-primary" />;
     }
-  }
+  };
+  const handleLogout = async () => {
+    const isLogout = await fetch("/api/logout", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if(isLogout.ok) {
+      setIsOpen(false)
+      setSession(undefined)
+      setCurrentView("admin")
+      router.replace("/")
+    } 
+  };
+
+  const ProfileView = () => (
+    <div className="p-4 space-y-6">
+      <div className="text-center space-y-2">
+        <div className="flex justify-center">
+          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+            <UserCog2 className="size-12 text-primary" />
+          </div>
+        </div>
+        <h2 className="text-2xl font-semibold">
+          Welcome,
+          <span className="text-xl text-black font-semibold">
+            {session?.username}!
+          </span>
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          You're logged in as an administrator
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <Button
+          variant="destructive"
+          className="w-full bg-primary text-white"
+          onClick={handleLogout}
+        >
+          <LogOut className="size-4 mr-2" />
+          Logout
+        </Button>
+      </div>
+    </div>
+  );
 
   const AdminView = () => {
     const form = useForm<z.infer<typeof adminSchema>>({
@@ -45,18 +120,18 @@ export default function ChatWidget() {
         username: "",
         password: "",
       },
-    })
+    });
 
     function onSubmit(values: z.infer<typeof adminSchema>) {
-      console.log(values)
+      console.log(values);
     }
 
     return (
       <div className="p-6 space-y-4">
         <LoginPage />
       </div>
-    )
-  }
+    );
+  };
 
   const ContactView = () => {
     const form = useForm<z.infer<typeof contactSchema>>({
@@ -66,10 +141,10 @@ export default function ChatWidget() {
         email: "",
         message: "",
       },
-    })
+    });
 
     function onSubmit(values: z.infer<typeof contactSchema>) {
-      console.log(values)
+      console.log(values);
     }
 
     return (
@@ -110,7 +185,11 @@ export default function ChatWidget() {
                 <FormItem>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Your message..." className="min-h-[100px] resize-none" {...field} />
+                    <Textarea
+                      placeholder="Your message..."
+                      className="min-h-[100px] resize-none"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -122,8 +201,8 @@ export default function ChatWidget() {
           </form>
         </Form>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="fixed bottom-4 right-4 flex flex-col items-end z-50">
@@ -216,6 +295,7 @@ export default function ChatWidget() {
             >
               {currentView === "admin" && <AdminView />}
               {currentView === "contact" && <ContactView />}
+              {(session && currentView === "profile") && <ProfileView />}
             </motion.div>
 
             {/* Bottom Navigation */}
@@ -228,7 +308,11 @@ export default function ChatWidget() {
               <Button
                 variant="ghost"
                 className={`flex flex-col items-center gap-1 py-3 h-auto rounded-lg hover:bg-primary hover:text-primary-foreground
-                  ${currentView === "contact" ? "bg-primary text-primary-foreground" : ""}`}
+                  ${
+                    currentView === "contact"
+                      ? "bg-primary text-primary-foreground"
+                      : ""
+                  }`}
                 onClick={() => setCurrentView("contact")}
               >
                 <MessageSquare className="size-5" />
@@ -237,11 +321,24 @@ export default function ChatWidget() {
               <Button
                 variant="ghost"
                 className={`flex flex-col items-center gap-1 py-3 h-auto rounded-lg hover:bg-primary hover:text-primary-foreground
-                  ${currentView === "admin" ? "bg-primary text-primary-foreground" : ""}`}
-                onClick={() => setCurrentView("admin")}
+                  ${
+                    currentView === "admin" || currentView === "profile"
+                      ? "bg-primary text-primary-foreground"
+                      : ""
+                  }`}
+                onClick={() => setCurrentView(session ? "profile" : "admin")}
               >
-                <Shield className="size-5" />
-                <span className="text-xs font-medium">Admin Access</span>
+                {session ? (
+                  <>
+                    <UserCog2 className="size-5" />
+                    <span className="text-xs font-medium">Profile</span>
+                  </>
+                ) : (
+                  <>
+                    <Shield className="size-5" />
+                    <span className="text-xs font-medium">Admin Access</span>
+                  </>
+                )}
               </Button>
             </motion.div>
           </motion.div>
@@ -261,7 +358,7 @@ export default function ChatWidget() {
         }}
       >
         <Button
-          className="rounded-full size-14 p-0 shadow-lg relative overflow-hidden group"
+          className="rounded-full size-14 p-0 shadow-lg relative overflow-hidden group flex items-center justify-center"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-haspopup="dialog"
@@ -279,11 +376,13 @@ export default function ChatWidget() {
             }}
           />
 
-          {isOpen ? <ChevronDown className="size-6 relative z-10" /> : <Send className="size-6 relative z-10" /> }
-          
+          {isOpen ? (
+            <ChevronDown className="size-6 relative z-10" />
+          ) : (
+            <Send className="size-6 relative z-10" />
+          )}
         </Button>
       </motion.div>
     </div>
-  )
+  );
 }
-

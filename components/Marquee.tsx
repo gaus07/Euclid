@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useEffect, useState } from "react";
 
 const companies = [
   {
@@ -14,7 +15,7 @@ const companies = [
   },
   {
     name: "ChainX Tech Labs",
-    logo: "/placeholder.svg?height=40&width=40", // Using placeholder since ChainX is fictional
+    logo: "/images/Collaborations/chainxtachlabs.jpg", 
   },
   {
     name: "Schneider Electric",
@@ -23,33 +24,40 @@ const companies = [
 ]
 
 export default function Marquee() {
+  const [duplicatedcompanies, setDuplicatedcompanies] = useState<typeof companies>([])
+
+  useEffect(() => {
+    setDuplicatedcompanies([...companies, ...companies])
+  }, [])
+
   return (
-    <div className="relative w-full overflow-hidden bg-background py-16">
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
-      <motion.div
-        className="flex whitespace-nowrap"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, ease: "linear", duration: 20 }}
-      >
-        {[...Array(4)].map((_, index) => (
-          <div key={index} className="flex items-center mx-4">
-            <span className="text-7xl sm:text-8xl md:text-7xl font-bold text-primary px-4 flex items-center gap-8">
-              {companies.map((company, idx) => (
-                <span key={idx} className="flex items-center gap-4">
-                  <Image
-                    src={company.logo || "/placeholder.svg"}
-                    alt={`${company.name} logo`}
-                    width={40}
-                    height={40}
-                    className="inline-block"
-                  />
-                  {company.name}
-                </span>
-              ))}
-            </span>
+    <div className="relative m-auto w-full overflow-hidden bg-white py-10">
+      <div className="relative flex w-full flex-nowrap gap-4">
+        <motion.div
+          className="flex gap-4 pr-4"
+          animate={{
+            x: ["0%", "-50%"],
+          }}
+          transition={{
+            duration: 20,
+            ease: "linear",
+            repeat: Number.POSITIVE_INFINITY,
+          }}
+        >
+          {duplicatedcompanies.map((logo, idx) => (
+            <div key={idx} className="flex w-[200px] items-center gap-6">
+            <img
+              src={logo.logo || "/placeholder.svg"}
+              alt={`${logo.name} logo`}
+              className="h-14 w-14 object-contain"
+            />
+            <p className="text-base font-semibold text-neutral-700">{logo.name}</p>
           </div>
-        ))}
-      </motion.div>
+          ))}
+        </motion.div>
+      </div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white to-transparent" />
     </div>
   )
 }

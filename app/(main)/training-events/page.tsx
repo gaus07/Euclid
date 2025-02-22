@@ -12,7 +12,7 @@ export default function TrainingEvents() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.h1
-            className="text-4xl font-bold text-center mb-8 text-primary"
+            className="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -43,18 +43,32 @@ export default function TrainingEvents() {
   )
 }
 
-const EventCard = ({ title, date, venue }: { title: string; date: string; venue: string }) => {
+interface EventCardProps {
+  title: string
+  date: string
+  venue: string
+}
+
+const EventCard: React.FC<EventCardProps> = ({ title, date, venue }) => {
   return (
-    <Card className="bg-card">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-secondary-foreground mb-2">Date: {date}</p>
-        <p className="text-secondary-foreground mb-4">Venue: {venue}</p>
-        <Button>Register Now</Button>
-      </CardContent>
-    </Card>
+    <motion.div
+      className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300 relative"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+      <div className="relative z-20 p-6">
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-secondary-foreground mb-2">Date: {date}</p>
+          <p className="text-secondary-foreground mb-4">Venue: {venue}</p>
+          <Button>Register Now</Button>
+        </CardContent>
+      </div>
+    </motion.div>
   )
 }
 

@@ -1,23 +1,26 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import ColourfulText from "@/components/ui/colourful-text"
 import { redirect } from "next/navigation"
 import { AcceptRequest } from "@/lib/adminQuery"
 import { getIronSession } from "iron-session"
-import { cookies, headers } from 'next/headers'; // Import headers
 import { sessionOptions } from "@/lib/sessionOptions"
 
-const Home = async() => {
+import {motion} from "framer-motion"
+
+const Home = () => {
   // const session = await auth()
   // if (!session) redirect("/sign-in") 
 
-  // const run = await AcceptRequest("testingbase07@gmail.com")
+  // const run = await AcceptRequest("gausnoori07@gmail.com")
   // console.log(run);
 
-  const cookiesData = await cookies();
-  const session = await getIronSession(cookiesData, sessionOptions);
+  // const cookiesData = await cookies();
+  // const session = await getIronSession(cookiesData, sessionOptions);
 
-  console.log(session); // Should now contain user data
+  // console.log(session); // Should now contain user data
 
   return (
     <div className="min-h-screen font-sans">
@@ -89,14 +92,22 @@ const Home = async() => {
 }
 export default Home;
 
-const FeatureCard = ({ title, description }: {title: string, description: string}) => (
-  <div className="p-6 rounded-xl bg-secondary hover:shadow-lg transition-shadow">
-    <h3 className="text-xl font-semibold text-primary mb-3">{title}</h3>
-    <p className="text-secondary-foreground">{description}</p>
-  </div>
+export const FeatureCard = ({ title, description }: {title: string, description: string}) => (
+  <motion.div
+    className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md transition-all duration-300"
+    whileHover={{ y: -5 }}
+    transition={{ duration: 0.2 }}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-md z-10" />
+    <div className="relative z-20 p-6 h-full flex flex-col">
+      <h3 className="text-xl font-semibold text-primary mb-3">{title}</h3>
+      <p className="text-secondary-foreground">{description}</p>
+    </div>
+  </motion.div>
 )
 
-const StatCard = ({ number, label }: {number: string, label: string}) => (
+export const StatCard = ({ number, label }: {number: string, label: string}) => (
   <div className="text-center p-6">
     <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{number}</div>
     <div className="text-secondary-foreground">{label}</div>

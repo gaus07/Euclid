@@ -1,23 +1,30 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin } from "lucide-react"
-import Marquee from "../Marquee"
+import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
+import Marquee from "../Marquee";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className="border-t border-primary/20 font-sans">
       <Marquee />
       <div className="max-w-7xl mx-auto py-16 px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full text-center">
           {/* Company Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 mx-auto md:mx-0 md:text-left">
             <Link href="/" className="text-xl font-bold text-primary">
-              EUCLID
+              {/* <Image
+                src="/euclid.png"
+                alt="EUCLID Logo"
+                width={120}
+                height={40}
+                className="object-contain"
+                priority
+              /> */}
+              EUCLUID
             </Link>
             <p className="text-secondary-foreground">
-              Pioneering ethical blockchain solutions for a secure, sustainable future.
+              Pioneering ethical blockchain solutions for a secure, sustainable
+              future.
             </p>
             {/* <div className="flex space-x-4">
               <SocialLink href="#" aria-label="LinkedIn">
@@ -34,8 +41,10 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Quick Links</h3>
+          <div className="mx-auto md:mx-0 md:text-left">
+            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">
+              Quick Links
+            </h3>
             <ul className="space-y-4">
               <FooterLink href="/about">About</FooterLink>
               <FooterLink href="/projects">Projects</FooterLink>
@@ -46,8 +55,10 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Contact Us</h3>
+          <div className="mx-auto md:mx-0 md:text-left">
+            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">
+              Contact Us
+            </h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
@@ -59,47 +70,46 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:info@euclid.edu" className="text-secondary-foreground hover:text-secondary">
+                <a
+                  href="mailto:info@euclid.edu"
+                  className="text-secondary-foreground hover:text-secondary"
+                >
                   info@euclid.edu
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+911234567890" className="text-secondary-foreground hover:text-secondary">
+                <a
+                  href="tel:+911234567890"
+                  className="text-secondary-foreground hover:text-secondary"
+                >
                   +91 123 456 7890
                 </a>
               </div>
             </div>
           </div>
-
-          {/* Contact Form */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase mb-6">Send us a message</h3>
-            <form className="space-y-4">
-              <Input type="email" placeholder="Email" />
-              <Textarea placeholder="Message" className="h-24" />
-              <Button type="submit" className="w-full">
-                Send Message
-              </Button>
-            </form>
-          </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-primary/20">
-          <p className="text-center text-gray-500">© {new Date().getFullYear()} EUCLID. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t border-primary/20 w-full text-center">
+          <p className="text-center text-gray-500">
+            © {new Date().getFullYear()} EUCLID. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-const FooterLink = ({ href, children }: {href: string, children: string}) => (
+const FooterLink = ({ href, children }: { href: string; children: string }) => (
   <li>
-    <Link href={href} className="text-secondary-foreground hover:text-secondary transition-colors">
+    <Link
+      href={href}
+      className="text-secondary-foreground hover:text-secondary transition-colors"
+    >
       {children}
     </Link>
   </li>
-)
+);
 
 // const SocialLink = ({ href, children, ...props }) => (
 //   <a href={href} className="text-primary hover:text-secondary transition-colors" {...props}>
@@ -107,5 +117,4 @@ const FooterLink = ({ href, children }: {href: string, children: string}) => (
 //   </a>
 // )
 
-export default Footer
-
+export default Footer;
