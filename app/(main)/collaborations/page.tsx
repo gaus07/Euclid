@@ -28,6 +28,12 @@ export default function Collaborations() {
         </div>
       </section> */}
 
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          {/* <StickyScrollRevealDemo /> */}
+        </div>
+      </section>
+
       {/* Case Study */}
       <section className="py-16">
         <div className="container mx-auto px-4">
