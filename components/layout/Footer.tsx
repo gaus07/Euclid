@@ -50,7 +50,6 @@ const Footer = () => {
               <FooterLink href="/projects">Projects</FooterLink>
               <FooterLink href="/achievements">Achievements</FooterLink>
               <FooterLink href="/training-events">Training & Events</FooterLink>
-              <FooterLink href="/collaborations">Collaborations</FooterLink>
             </ul>
           </div>
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
-import type React from "react" // Added import for React
+import type React from "react"
 
 interface ModalProps {
   isOpen: boolean

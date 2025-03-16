@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-// import { useSession, signOut } from "next-auth/react"
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Modal } from "../Modal";
@@ -16,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Image from "next/image";
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,9 +63,8 @@ const Navbar = () => {
               <div className="ml-10 flex items-center space-x-8">
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
-                {/* <NavLink href="/achievements">Achievements</NavLink> */}
-                <NavLink href="/training-events">Events</NavLink>
-                <NavLink href="/collaborations">Collaborations</NavLink>
+                <NavLink href="/training-events">Connect</NavLink>
+                
                 <Select value={theme} onValueChange={handleThemeChange}>
                   <SelectTrigger className="w-[150px]">
                     <SelectValue placeholder="Theme" />
@@ -138,20 +134,11 @@ const Navbar = () => {
                   >
                     Projects
                   </MobileNavLink>
-                  {/* <MobileNavLink href="/achievements" onClick={() => setIsOpen(false)}>
-                    Achievements
-                  </MobileNavLink> */}
                   <MobileNavLink
                     href="/training-events"
                     onClick={() => setIsOpen(false)}
                   >
-                    Events
-                  </MobileNavLink>
-                  <MobileNavLink
-                    href="/collaborations"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Collaborations
+                    Connect
                   </MobileNavLink>
                   <Select value={theme} onValueChange={handleThemeChange}>
                     <SelectTrigger className="w-full">

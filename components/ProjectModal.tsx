@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import type React from "react" // Added import for React
+import type React from "react"
 import { Dialog } from "@/components/ui/dialog"
 
 interface ProjectModalProps {

@@ -8,6 +8,7 @@ import { MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { EventModal } from "@/components/EventModal"
+import IndustrySection from "@/components/IndustrySection"
 
 interface EventHost {
   name: string
@@ -27,7 +28,6 @@ interface Event {
   host?: EventHost
 }
 
-// Update sample data with proper structure
 const featuredEvents: Event[] = [
   {
     id: 1,
@@ -139,31 +139,25 @@ const pastEvents: Event[] = [
 
 export default function TrainingEvents() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-sans">
       <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Header Section */}
-      <section className="py-4 bg-secondary/50">
+      <IndustrySection />
+      <section className="py-10 bg-secondary/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-primary font-medium mb-4 block"
-            >
-              EVENTS
-            </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ duration: 0.8 }}
               className="text-4xl md:text-5xl font-bold mb-4"
             >
-              Browse all the events
+              Browse all the Events
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ duration: 0.8 }}
               className="text-muted-foreground max-w-2xl mx-auto"
             >
               Discover upcoming blockchain technology events, workshops, and training sessions
@@ -173,7 +167,7 @@ export default function TrainingEvents() {
       </section>
 
       {/* Featured Events */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Featured events</h2>
@@ -199,7 +193,7 @@ export default function TrainingEvents() {
       </section>
 
       {/* Past Events */}
-      <section className="py-16 bg-secondary/5">
+      <section className="py-10 bg-secondary/5">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Past events</h2>
@@ -237,7 +231,7 @@ const FeaturedEventCard: React.FC<EventCardProps> = ({ event }) => {
   return (
     <>
       <motion.div
-        className="overflow-hidden rounded-xl group cursor-pointer bg-card relative"
+        className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md relative"
         whileHover={{ y: -5 }}
         transition={{ duration: 0.2 }}
         onClick={() => setIsModalOpen(true)}
@@ -284,7 +278,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   return (
     <>
       <motion.div
-        className="overflow-hidden rounded-xl group cursor-pointer bg-card relative"
+        className="overflow-hidden rounded-lg group cursor-pointer bg-emerald-50/10 shadow-sm backdrop-filter backdrop-blur-md relative"
         whileHover={{ y: -5 }}
         transition={{ duration: 0.2 }}
         onClick={() => setIsModalOpen(true)}

@@ -69,10 +69,6 @@ export function EventModal({ isOpen, onClose, event }: EventModalProps) {
 
             {/* Image Gallery */}
             <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
-              {/* <button className="absolute left-4 top-4 z-20 flex items-center gap-2 rounded-full bg-black/50 px-4 py-2 text-sm text-white backdrop-blur-sm transition-colors hover:bg-black/70">
-                <ImageIcon className="h-4 w-4" />
-                View gallery
-              </button> */}
               <Carousel
                 opts={{
                   align: "start",

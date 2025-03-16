@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div className="min-h-screen font-sans">
       {/* Hero Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> */}
             <div className="space-y-8 flex flex-col items-center">
@@ -40,16 +40,6 @@ const Home = () => {
                 <Link href="/projects">Get the best solutions</Link>
               </Button>
             </div>
-            {/* <div className="relative"> */}
-              {/* <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hxNe18EgbBqPP7KGTcdiz7aA7zSeCI.png"
-                alt="Blockchain visualization"
-                className="rounded-2xl shadow-2xl w-full"
-              /> */}
-              {/* <div className="absolute -z-10 top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div> */}
-              {/* <div className="absolute -z-10 bottom-0 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div> */}
-            {/* </div> */}
-          {/* </div> */}
         </div>
       </section>
 

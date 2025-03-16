@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import type React from "react" // Added import for React
+import type React from "react"
 
 interface ImagePopupProps {
   src: string

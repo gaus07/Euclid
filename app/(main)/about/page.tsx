@@ -4,8 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { BookOpen, Brain, Building2, ChevronRight, GraduationCap, LineChart, Target, Users } from "lucide-react"
-import Link from "next/link"
-import type React from "react" // Import React
+import type React from "react"
 import { Timeline } from "@/components/ui/timeline"
 import { ImagePopup } from "@/components/ImagePopUp"
 import Image from "next/image"
@@ -49,7 +48,7 @@ export default function AboutPage() {
     <div className="min-h-screen font-sans">
       <div className="absolute w-full h-full bg-gradient-to-b from-[var(--gradient-start)] to-background/80 opacity-90 -z-50"></div>
       {/* Hero Section */}
-      <section className="relative bg-secondary/50 py-16">
+      <section className="relative bg-secondary/50 py-10">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +59,7 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               About Euclid
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-4">
               Our project focuses on enhancing the sustainability and security of blockchain networks through innovative
               research and development.
             </p>
@@ -190,7 +189,6 @@ export default function AboutPage() {
       {/* Achievements */}
       <section className="py-16 bg-secondary/50">
         <div className="container mx-auto px-4">
-          {/* <h2 className="text-3xl font-bold mb-12 text-center">Our Achievements</h2> */}
           <Timeline
             data={[
               {
@@ -317,43 +315,6 @@ const ObjectiveCard = ({
       <p className="text-black text-sm flex-grow">{description}</p>
     </div>
   </motion.div>
-)
-
-const TeamMemberCard = ({ name, role, image }: { name: string; role: string; image: string }) => (
-  <Card>
-    <CardContent className="p-0">
-      <img src={image || "/placeholder.svg"} alt={name} className="w-full h-full object-fill" />
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-1">{name}</h3>
-        <p className="text-muted-foreground">{role}</p>
-      </div>
-    </CardContent>
-  </Card>
-)
-
-const ProjectCard = ({ title, description }: { title: string; description: string }) => (
-  <Card>
-    <CardContent className="p-6">
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </CardContent>
-  </Card>
-)
-
-const AchievementItem = ({ children }: { children: React.ReactNode }) => (
-  <li className="flex items-start gap-2">
-    <div className="mt-1.5">
-      <div className="h-2 w-2 rounded-full bg-primary" />
-    </div>
-    <p className="text-muted-foreground">{children}</p>
-  </li>
-)
-
-const FutureItem = ({ children }: { children: React.ReactNode }) => (
-  <li className="flex items-center gap-2">
-    <ChevronRight className="h-5 w-5 text-primary" />
-    <span className="text-muted-foreground">{children}</span>
-  </li>
 )
 
 const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => (

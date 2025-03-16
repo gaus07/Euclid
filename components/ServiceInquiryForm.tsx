@@ -11,8 +11,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
-
 const phoneRegex = /^(\+91[-\s]?)?[0]?(91)?[789]\d{9}$/
 
 const schema = z.object({

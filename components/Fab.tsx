@@ -7,7 +7,6 @@ import {
   Shield,
   MessageSquare,
   Send,
-  UserCircle,
   LogOut,
   UserCog2,
 } from "lucide-react";
