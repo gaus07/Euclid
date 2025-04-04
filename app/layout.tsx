@@ -17,6 +17,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+
+  // Skip rendering the main layout for admin routes
+  if (pathname?.startsWith("/admin")) {
+    return (
+      <html lang="en">
+        <body className={inter.className}>{children}</body>
+      </html>
+    )
+  }
+  
   const isLoginPage = pathname === "/login"
 
   return (

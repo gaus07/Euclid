@@ -8,7 +8,7 @@ import {
   MessageSquare,
   Send,
   LogOut,
-  UserCog2,
+  UserCog2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +27,8 @@ import * as z from "zod";
 import LoginPage from "./auth/login";
 import { getUser } from "@/actions/actions";
 import { SessionData } from "@/lib/sessionOptions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import validator from "validator"
 
 type View = "admin" | "contact" | "profile";
 
@@ -39,6 +40,7 @@ const adminSchema = z.object({
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
+  contactno: z.string().refine(validator.isMobilePhone),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -46,7 +48,20 @@ export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState<View>("contact");
   const [session, setSession] = useState<SessionData | undefined>();
+  const [accessKey, setAccessKey] = useState<string>("abcd");
+  const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const keyParam = searchParams.get("access_key");
+
+    if (keyParam && keyParam === accessKey) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [searchParams, accessKey]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +71,11 @@ export default function ChatWidget() {
     fetchData();
   }, [router]);
 
+  // const copyAccessKey = () => {
+  //   navigator.clipboard.writeText(`${window.location.origin}?access_key=${accessKey}`);
+  //   alert("Access URL copied to clipboard!");
+  // };
+
   const getHeaderIcon = () => {
     switch (currentView) {
       case "admin":
@@ -64,6 +84,7 @@ export default function ChatWidget() {
         return <MessageSquare className="size-8 text-primary" />;
     }
   };
+
   const handleLogout = async () => {
     const isLogout = await fetch("/api/logout", {
       method: "GET",
@@ -72,12 +93,12 @@ export default function ChatWidget() {
       },
     });
 
-    if(isLogout.ok) {
-      setIsOpen(false)
-      setSession(undefined)
-      setCurrentView("admin")
-      router.replace("/")
-    } 
+    if (isLogout.ok) {
+      setIsOpen(false);
+      setSession(undefined);
+      setCurrentView("admin");
+      router.replace("/");
+    }
   };
 
   const ProfileView = () => (
@@ -128,6 +149,22 @@ export default function ChatWidget() {
     return (
       <div className="p-6 space-y-4">
         <LoginPage />
+        {/* {show && (
+          <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Key className="h-4 w-4 text-primary" />
+                <span className="text-xs text-muted-foreground">Admin Access Key</span>
+              </div>
+              <button
+                onClick={copyAccessKey}
+                className="text-xs text-primary hover:text-primary/80 underline"
+              >
+                Copy URL
+              </button>
+            </div>
+          </div>
+        )} */}
       </div>
     );
   };
@@ -138,12 +175,24 @@ export default function ChatWidget() {
       defaultValues: {
         name: "",
         email: "",
+        contactno: "",
         message: "",
       },
     });
 
-    function onSubmit(values: z.infer<typeof contactSchema>) {
-      console.log(values);
+    async function onSubmit(values: z.infer<typeof contactSchema>) {
+      await fetch("/api/services", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      }
+      )
+      .then((ok) => {
+        if(ok.ok) console.log("successfully submitted");
+      })
+      .catch((err) => console.log(err))
     }
 
     return (
@@ -156,7 +205,7 @@ export default function ChatWidget() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Full Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Your name" {...field} />
                   </FormControl>
@@ -169,9 +218,22 @@ export default function ChatWidget() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Work Email</FormLabel>
                   <FormControl>
                     <Input type="email" placeholder="Your email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="contactno"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Contact Number</FormLabel>
+                  <FormControl>
+                    <Input type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -292,14 +354,15 @@ export default function ChatWidget() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              {currentView === "admin" && <AdminView />}
+              {currentView === "admin" && show && <AdminView />}
               {currentView === "contact" && <ContactView />}
-              {(session && currentView === "profile") && <ProfileView />}
+              {session && currentView === "profile" && <ProfileView />}
             </motion.div>
 
             {/* Bottom Navigation */}
             <motion.div
               className="mt-auto bg-muted/10 p-2 grid grid-cols-2 gap-2"
+              style={{ gridTemplateColumns: show || session ? "1fr 1fr" : "1fr" }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -317,6 +380,7 @@ export default function ChatWidget() {
                 <MessageSquare className="size-5" />
                 <span className="text-xs font-medium">Contact Us</span>
               </Button>
+              { (show || session) && (
               <Button
                 variant="ghost"
                 className={`flex flex-col items-center gap-1 py-3 h-auto rounded-lg hover:bg-primary hover:text-primary-foreground
@@ -326,6 +390,7 @@ export default function ChatWidget() {
                       : ""
                   }`}
                 onClick={() => setCurrentView(session ? "profile" : "admin")}
+                disabled={!show && !session}
               >
                 {session ? (
                   <>
@@ -339,6 +404,7 @@ export default function ChatWidget() {
                   </>
                 )}
               </Button>
+        )}
             </motion.div>
           </motion.div>
         )}

@@ -1,16 +1,49 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server"
+import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    // Here you would typically process the form data,
-    // e.g., save to a database, send an email, etc.
-    console.log("Received form submission:", body)
+    const {name, email, contactno, message} = await req.json()
+    
+    const transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: Number(process.env.SMTP_PORT),
+          secure: process.env.SMTP_SECURE === 'true', 
+          auth: {
+            user: process.env.SMTP_USER,  
+            pass: process.env.SMTP_PASS,     
+          },
+    });
 
-    // Simulate a delay to show loading state
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const mail = prisma.service.create({
+      data: { name, email, phone: contactno, message }
+    })
 
-    return NextResponse.json({ message: "Form submitted successfully" }, { status: 200 })
+
+    if(!mail) 
+      return NextResponse.json({ message: "something went wrong" }, { status: 401 })
+
+    const _message = {
+      from: `"Euclid" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: "Euclid - Services",
+      text: `Name: ${name}\nEmail: ${email}\nContact No: ${contactno}\nMessage: ${message}`,
+    }
+
+    await transporter.sendMail(_message);
+
+    await prisma.service.create({
+      data: {
+        email,
+        message,
+        name,
+        phone: contactno,
+      }
+    })
+
+
+    return NextResponse.json({ message: "submitted successfully" }, { status: 200 })
   } catch (error) {
     console.error("Error processing form submission:", error)
     return NextResponse.json({ message: "An error occurred while processing your request" }, { status: 500 })

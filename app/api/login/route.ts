@@ -42,6 +42,7 @@ export async function POST(request: Request) {
       }),
     });
 
+
     return Response.json({ message: "Verification code sent" });
   } catch (error) {
     return Response.json({ error: "Something went wrong" }, { status: 500 });
