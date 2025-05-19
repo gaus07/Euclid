@@ -1,9 +1,11 @@
+import { unauthorized } from 'next/navigation';
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
     const { email, subject, text } = await request.json();
+    console.log(email);
 
     if (!email || !subject || !text) {
       return NextResponse.json(
@@ -14,6 +16,9 @@ export async function POST(request: Request) {
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
+      tls: {
+        rejectUnauthorized: false, // Allow self-signed certificates
+      },
       port: Number(process.env.SMTP_PORT),
       secure: process.env.SMTP_SECURE === 'true', 
       auth: {

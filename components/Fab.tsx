@@ -29,6 +29,8 @@ import { getUser } from "@/actions/actions";
 import { SessionData } from "@/lib/sessionOptions";
 import { useRouter, useSearchParams } from "next/navigation";
 import validator from "validator"
+import { useToast } from "@/hooks/use-toast"
+
 
 type View = "admin" | "contact" | "profile";
 
@@ -52,6 +54,7 @@ export default function ChatWidget() {
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { toast } = useToast()
 
   useEffect(() => {
     const keyParam = searchParams.get("access_key");
@@ -190,9 +193,21 @@ export default function ChatWidget() {
       }
       )
       .then((ok) => {
-        if(ok.ok) console.log("successfully submitted");
+        if(ok.ok) {
+        // toast({
+        //   title: "Success",
+        //   description: "Successfully submitted.",
+        // })
+        form.reset();
+        console.log("successfully submitted");
+    }})
+      .catch((err) => {
+        // toast({
+        //   title: "Error",
+        //   description: "Error submitting form!",
+        // })
+        console.log(err)
       })
-      .catch((err) => console.log(err))
     }
 
     return (

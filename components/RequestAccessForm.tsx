@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+// import { errorToast, successToast } from "@/lib/toast-utils";
 
 interface RequestAccessFormProps {
   setShowRequestAccess: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,6 +18,7 @@ export function RequestAccessForm({ setShowRequestAccess }: RequestAccessFormPro
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  // const [error, setError] = useState("")
 
   const handleSendOtp = async () => {
     await fetch('/api/request-access', {
@@ -24,8 +26,13 @@ export function RequestAccessForm({ setShowRequestAccess }: RequestAccessFormPro
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     }).then((res) => {
-      if (res.ok) setIsOtpSent(true);
+      if (res.ok) {
+        setIsOtpSent(true);
+        // successToast("OTP sent to your email.");
+      }
   }).catch((error) => {
+    // setError("Error sending OTP.");
+    // errorToast("Error sending OTP.");
     console.error(error);
   });
   };
@@ -36,8 +43,13 @@ export function RequestAccessForm({ setShowRequestAccess }: RequestAccessFormPro
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ otp, email }),
     }).then((res) => {
-      if (res.ok) setIsOtpVerified(true);
+      if (res.ok) {
+        setIsOtpVerified(true);
+        // successToast("OTP verified successfully.");
+      }
     }).catch((error) => {
+      // setError("Invalid OTP.");
+      // errorToast("Invalid OTP.");
       console.error(error);
     })
   };
@@ -52,9 +64,12 @@ export function RequestAccessForm({ setShowRequestAccess }: RequestAccessFormPro
       body: JSON.stringify({ email, username }),
     }).then((res) => {
       if (res.ok) {
+        // successToast("Request submitted successfully.");
         setShowRequestAccess(false);
       }
     }).catch((error) => {
+      // setError("Error submitting request.");
+      // errorToast("Error submitting request.");
       console.error(error);
     })
   };

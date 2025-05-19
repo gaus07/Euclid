@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "MailStatus" AS ENUM ('NEW', 'READ');
+CREATE TYPE "MailStatus" AS ENUM ('NEW', 'READ', 'ARCHIVED');
 
 -- CreateTable
 CREATE TABLE "User" (

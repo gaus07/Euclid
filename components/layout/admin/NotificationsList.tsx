@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { MoreHorizontal, Eye, CheckCircle, Archive } from "lucide-react"
 import { NotificationDetails } from "./NotificationDetails"
 import { MailStatus, Service } from "@prisma/client"
+// import { successToast } from "@/lib/toast-utils"
 
 
 export function NotificationsList() {
@@ -52,6 +53,7 @@ export function NotificationsList() {
       ),
     )
     setDropdownOpen(false)
+    // successToast("Notification marked as read")
   }
 
   const archiveNotification = async (id: number) => {
@@ -68,6 +70,7 @@ export function NotificationsList() {
       ),
     )
     setDropdownOpen(false)
+    // successToast("Notification archived")
   }
 
   const handleViewDetails = (notification: Service) => {

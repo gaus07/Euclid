@@ -6,14 +6,14 @@ import nodemailer from "nodemailer";
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
-
+    
     if (!email) {
       return Response.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
-
+    
     const isAuthorized = await prisma.user.findUnique({
       where: { email, isVarified: true },
     });
@@ -24,10 +24,12 @@ export async function POST(request: Request) {
       });
     }
     
+  
     await prisma.verificationToken.deleteMany({ where: { email } });
-
+    
     const token = generateOTP();
     const expires = new Date(Date.now() + 10 * 60 * 1000);
+
     await prisma.verificationToken.create({
       data: { email, token, expires },
     });
@@ -41,7 +43,6 @@ export async function POST(request: Request) {
         subject: "Your OTP for admin access",
       }),
     });
-
 
     return Response.json({ message: "Verification code sent" });
   } catch (error) {

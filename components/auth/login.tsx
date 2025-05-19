@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { RequestAccessForm } from "@/components/RequestAccessForm";
 import { AcceptRequest } from "@/lib/adminQuery";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+// import { errorToast, successToast } from "@/lib/toast-utils";
 // import { sendEmail } from "@/lib/utils";
 
 export default function LoginPage() {
@@ -18,8 +20,9 @@ export default function LoginPage() {
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  // const [error, setError] = useState("")
   const router = useRouter()
-
+  const { toast } = useToast()
 
   useEffect(() => {
     const send = async () => {
@@ -34,8 +37,6 @@ export default function LoginPage() {
       //     text: Your OTP is ${123456},
       //   }),
       // });
-
-
     };
     send();
   }, []);
@@ -50,9 +51,21 @@ export default function LoginPage() {
       body: JSON.stringify({ email: email }),
     })
       .then((res) => {
-        if (res.ok) setIsOtpSent(true);
+        if (res.ok) {
+          setIsOtpSent(true);
+          setTimeout(() => {
+            // toast({
+            //   title: "OTP Sent",
+            //   description: `A verification code has been sent to ${email}`,
+            // })
+          }, 3000)
+        }
       })
       .catch((error) => {
+        // toast({
+        //   title: "Error sending OTP",
+        //   description: "Error sending OTP",
+        // })
         console.log("Error:", error);
       });
   };
@@ -66,9 +79,21 @@ export default function LoginPage() {
       body: JSON.stringify({ otp: otp, email: email }),
     })
       .then((res) => {
-        if (res.ok) setIsOtpVerified(true);
+        if (res.ok) {
+          setIsOtpVerified(true);
+          setTimeout(() => {
+            // toast({
+            //   title: "OTP Verified",
+            //   description: "Your verification code has been confirmed",
+            // })
+          }, 3000)
+        }
       })
       .catch((error) => {
+        // toast({
+        //   title: "Invalid OTP.",
+        //   description: "Invalid OTP.",
+        // })
         console.log("Error:", error);
       });
   };
@@ -77,6 +102,10 @@ export default function LoginPage() {
     // Handle request access logic here
     router.replace("/");
     setShowRequestAccess(false);
+    // toast({
+    //   title: "Logged in successfully.",
+    //   description: "Logged in successfully.",
+    // });
   };
 
   return (

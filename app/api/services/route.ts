@@ -8,6 +8,9 @@ export async function POST(req: Request) {
     
     const transporter = nodemailer.createTransport({
           host: 'smtp.gmail.com',
+          tls: {
+            rejectUnauthorized: false, // Allow self-signed certificates
+          },
           port: Number(process.env.SMTP_PORT),
           secure: process.env.SMTP_SECURE === 'true', 
           auth: {
@@ -41,8 +44,7 @@ export async function POST(req: Request) {
         phone: contactno,
       }
     })
-
-
+    
     return NextResponse.json({ message: "submitted successfully" }, { status: 200 })
   } catch (error) {
     console.error("Error processing form submission:", error)

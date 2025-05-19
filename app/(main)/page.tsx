@@ -7,10 +7,30 @@ import { redirect } from "next/navigation"
 import { AcceptRequest } from "@/lib/adminQuery"
 import { getIronSession } from "iron-session"
 import { sessionOptions } from "@/lib/sessionOptions"
+import { useToast } from "@/hooks/use-toast"
 
 import {motion} from "framer-motion"
+import { useState } from "react"
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
+
+  const handleGetSolutions = async () => {
+    setIsLoading(true)
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      toast({
+        title: "Scheduled: Catch up",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      })
+    } catch (error) {
+      console.error("Error:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   // const session = await auth()
   // if (!session) redirect("/sign-in") 
 
@@ -36,8 +56,11 @@ const Home = () => {
                 Pioneering ethical blockchain solutions for a secure, sustainable future at Somaiya Vidyavihar
                 University.
               </p>
-              <Button size="lg" asChild>
+              {/* <Button size="lg" asChild>
                 <Link href="/projects">Get the best solutions</Link>
+              </Button> */}
+              <Button size="lg" onClick={handleGetSolutions} disabled={isLoading}>
+                {isLoading ? "Processing..." : "Get the best solutions"}
               </Button>
             </div>
         </div>
